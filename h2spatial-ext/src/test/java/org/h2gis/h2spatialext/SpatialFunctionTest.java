@@ -495,13 +495,17 @@ public class SpatialFunctionTest {
 
     @Test
     public void test_ST_MakePoint() throws Exception {
-        ResultSet rs = st.executeQuery("SELECT ST_MakePoint(1.4, -3.7), "
-                + "ST_MakePoint(1.4, -3.7, 6.2);");
+        Statement st = connection.createStatement();
+        ResultSet rs = st.executeQuery("SELECT ST_MakePoint(1.4, -3.7), " +
+                "ST_MakePoint(1.4, -3.7, 6.2)," +
+                "ST_MakePoint(1.4, -3.7, 6.2, 0.01);");
         assertTrue(rs.next());
         assertEquals(WKT_READER.read("POINT(1.4 -3.7)"), rs.getObject(1));
         assertEquals(WKT_READER.read("POINT(1.4 -3.7 6.2)"), rs.getObject(2));
+        assertEquals(WKT_READER.read("POINT(1.4 -3.7 6.2)"), rs.getObject(3));
         assertFalse(rs.next());
         rs.close();
+        st.close();
     }
 
     @Test

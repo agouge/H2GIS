@@ -28,6 +28,7 @@ package org.h2gis.h2spatialext.function.spatial.create;
 import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.GeometryFactory;
 import com.vividsolutions.jts.geom.Point;
+import com.vividsolutions.jts.geom.PrecisionModel;
 import org.h2gis.h2spatialapi.DeterministicScalarFunction;
 
 import java.sql.SQLException;
@@ -51,7 +52,7 @@ public class ST_MakePoint extends DeterministicScalarFunction {
     }
 
     /**
-     * Constructs POINT from two doubles.
+     * Constructs POINT from two coordinates.
      *
      * @param x X-coordinate
      * @param y Y-coordinate
@@ -62,7 +63,7 @@ public class ST_MakePoint extends DeterministicScalarFunction {
     }
 
     /**
-     * Constructs POINT from three doubles.
+     * Constructs POINT from three coordinates.
      *
      * @param x X-coordinate
      * @param y Y-coordinate
@@ -71,5 +72,18 @@ public class ST_MakePoint extends DeterministicScalarFunction {
      */
     public static Point createPoint(double x, double y, double z) throws SQLException {
         return GF.createPoint(new Coordinate(x, y, z));
+    }
+
+    /**
+     * Constructs POINT from three coordinates and a measure.
+     *
+     * @param x X-coordinate
+     * @param y Y-coordinate
+     * @param z Z-coordinate
+     * @param m Measure
+     * @return The POINT constructed from the given coordinates and measure
+     */
+    public static Point createPoint(double x, double y, double z, double m) throws SQLException {
+        return new GeometryFactory(new PrecisionModel(m)).createPoint(new Coordinate(x, y, z));
     }
 }
