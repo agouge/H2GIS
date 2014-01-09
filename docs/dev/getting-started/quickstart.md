@@ -1,6 +1,7 @@
 ---
 layout: docs
 title: Quick-start guide
+version: 1.2
 prev_section: home
 next_section: h2drivers
 permalink: /docs/dev/quickstart/

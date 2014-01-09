@@ -10,6 +10,15 @@ layout: default
       <div class="unit four-fifths">
         <article>
           <h1>{{ page.title }}</h1>
+          {% if page.version == 'dev' %}
+          <span class="post-category">
+            <span class="label">Development version</span>
+          </span>
+          {% else %}
+          <span class="post-category">
+            <span class="label">Version {{ page.version }}</span>
+          </span>
+          {% endif %}
           {{ content }}
           {% include section_nav.html %}
         </article>
