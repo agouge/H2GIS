@@ -15,10 +15,10 @@
    id="svg3644"
    version="1.1"
    inkscape:version="0.48.4 r9939"
-   sodipodi:docname="logo_h2gis.svg"
+   sodipodi:docname="logo_h2gis_hover.svg"
    inkscape:export-filename="/home/adam/projects/H2GIS/site/img/logo_h2gis.png"
-   inkscape:export-xdpi="122.93683"
-   inkscape:export-ydpi="122.93683">
+   inkscape:export-xdpi="122.78588"
+   inkscape:export-ydpi="122.78588">
   <defs
      id="defs3646">
     <clipPath
@@ -145,7 +145,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -310,21 +310,21 @@
     </g>
     <g
        transform="matrix(0,-1,1,0,0,-26.000105)"
-       style="font-size:117.56576538px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#4db3ff;fill-opacity:1;stroke:none;display:inline;font-family:Sans"
+       style="font-size:117.56576537999998777px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#0092ff;fill-opacity:1;stroke:none;display:inline;font-family:Sans"
        id="text3123">
       <path
          d="m -1253.045,749.05137 c -5.511,2.67891 -11.2323,4.68809 -17.1641,6.02754 -5.932,1.33945 -12.0552,2.00918 -18.3697,2.00918 -14.2748,0 -25.5836,-3.98009 -33.9264,-11.94027 -8.3429,-7.99844 -12.5144,-18.82887 -12.5144,-32.49132 0,-13.81546 4.248,-24.68415 12.744,-32.60613 8.4959,-7.92183 20.13,-11.88278 34.9023,-11.88287 5.7022,9e-5 11.1557,0.53587 16.3605,1.60734 5.2429,1.07165 10.1798,2.65986 14.8105,4.76463 l 0,17.7382 c -4.7838,-2.71712 -9.5484,-4.74543 -14.2939,-6.08495 -4.7072,-1.33938 -9.4336,-2.00911 -14.179,-2.00918 -8.8022,7e-5 -15.5951,2.46849 -20.3789,7.40526 -4.7455,4.89864 -7.1182,11.92119 -7.1182,21.0677 0,9.07005 2.2962,16.07347 6.8886,21.01028 4.5924,4.93687 11.1174,7.40528 19.5752,7.40527 2.2961,10e-6 4.4201,-0.13393 6.372,-0.40184 1.9899,-0.30614 3.7695,-0.76538 5.3386,-1.37772 l 0,-16.6475 -13.4902,0 0,-14.81053 34.4431,0 0,41.21691"
-         style="font-variant:normal;font-weight:bold;font-stretch:normal;fill:#4db3ff;fill-opacity:1;font-family:Dingbats;-inkscape-font-specification:Dingbats Bold"
+         style="font-variant:normal;font-weight:bold;font-stretch:normal;fill:#0092ff;fill-opacity:1;font-family:Dingbats;-inkscape-font-specification:Dingbats Bold"
          id="path3130"
          inkscape:connector-curvature="0" />
       <path
          d="m -1233.642,669.71744 22.1009,0 0,85.7059 -22.1009,0 0,-85.7059"
-         style="font-variant:normal;font-weight:bold;font-stretch:normal;fill:#4db3ff;fill-opacity:1;font-family:Dingbats;-inkscape-font-specification:Dingbats Bold"
+         style="font-variant:normal;font-weight:bold;font-stretch:normal;fill:#0092ff;fill-opacity:1;font-family:Dingbats;-inkscape-font-specification:Dingbats Bold"
          id="path3132"
          inkscape:connector-curvature="0" />
       <path
          d="m -1130.1405,672.41548 0,18.14003 c -4.7073,-2.10479 -9.2997,-3.693 -13.7773,-4.76463 -4.4776,-1.07149 -8.7065,-1.60727 -12.6865,-1.60734 -5.2813,7e-5 -9.1849,0.7272 -11.7107,2.18139 -2.5258,1.45434 -3.7887,3.71227 -3.7887,6.77381 0,2.29627 0.8419,4.09496 2.5258,5.39609 1.7221,1.26297 4.822,2.35366 9.2996,3.27209 l 9.4145,1.89437 c 9.5292,1.91356 16.303,4.82208 20.3214,8.72559 4.0183,3.90359 6.0275,9.45275 6.0276,16.64749 -10e-5,9.45273 -2.813,16.49443 -8.4386,21.1251 -5.5875,4.59241 -14.1409,6.88862 -25.6601,6.88862 -5.4344,0 -10.8879,-0.51665 -16.3605,-1.54994 -5.4726,-1.03329 -10.9452,-2.56409 -16.4178,-4.59241 l 0,-18.65668 c 5.4726,2.90855 10.7538,5.10908 15.8438,6.60159 5.1281,1.45428 10.065,2.18141 14.8105,2.1814 4.822,10e-6 8.5151,-0.80366 11.0792,-2.41102 2.564,-1.60732 3.8461,-3.90353 3.8461,-6.88862 0,-2.67888 -0.8802,-4.74546 -2.6406,-6.19975 -1.7222,-1.45424 -5.1856,-2.75542 -10.3903,-3.90355 l -8.5534,-1.89437 c -8.5725,-1.83693 -14.8488,-4.76459 -18.8289,-8.78299 -3.9418,-4.01832 -5.9127,-9.43353 -5.9127,-16.24566 0,-8.53417 2.7554,-15.09748 8.2663,-19.68997 5.5109,-4.59233 13.4328,-6.88853 23.7658,-6.88862 4.7071,9e-5 9.5483,0.36365 14.5235,1.0907 4.975,0.68894 10.1223,1.74137 15.442,3.15728"
-         style="font-variant:normal;font-weight:bold;font-stretch:normal;fill:#4db3ff;fill-opacity:1;font-family:Dingbats;-inkscape-font-specification:Dingbats Bold"
+         style="font-variant:normal;font-weight:bold;font-stretch:normal;fill:#0092ff;fill-opacity:1;font-family:Dingbats;-inkscape-font-specification:Dingbats Bold"
          id="path3134"
          inkscape:connector-curvature="0" />
     </g>
