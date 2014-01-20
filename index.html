@@ -80,3 +80,15 @@ description: A spatial extension of the H2 database. Compliant, Solid, Tested.
     <div class="clear"></div>
   </div>
 </section>
+<section>
+<input id="search" type="input" placeholder="Search by title."/>
+<style id="search-style"></style>
+<div class="all-posts">
+  {% for post in site.pages %}
+    <article class="post" data-index="{{ post.title | downcase }}">
+      <h1>{{ post.title }}</h1>
+      <p>{{ post.excerpt }}</p>
+    </article>
+  {% endfor %}
+</div>
+</section>
