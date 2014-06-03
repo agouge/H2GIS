@@ -25,10 +25,12 @@
 
 package org.h2gis.h2spatialext.function.spatial.distance;
 
-import com.vividsolutions.jts.geom.Geometry;
-import com.vividsolutions.jts.geom.Point;
+import com.vividsolutions.jts.geom.*;
 import com.vividsolutions.jts.operation.distance.DistanceOp;
 import org.h2gis.h2spatialapi.DeterministicScalarFunction;
+import org.h2gis.h2spatialext.function.spatial.processing.ST_PrecisionReducer;
+
+import java.sql.SQLException;
 
 /**
  * ST_ClosestPoint returns the 2D point on geometry A that is closest to
@@ -57,12 +59,17 @@ public class ST_ClosestPoint extends DeterministicScalarFunction {
      * @param geomB Geometry B
      * @return The 2D point on geometry A that is closest to geometry B
      */
-    public static Point closestPoint(Geometry geomA, Geometry geomB) {
+    public static Point closestPoint(Geometry geomA, Geometry geomB) throws SQLException {
         if (geomA == null || geomB == null) {
             return null;
         }
         // Return the closest point on geomA. (We would have used index
         // 1 to return the closest point on geomB.)
-        return geomA.getFactory().createPoint(DistanceOp.nearestPoints(geomA, geomB)[0]);
+        final Coordinate coordinate = DistanceOp.nearestPoints(geomA, geomB)[0];
+        final GeometryFactory factory = geomA.getFactory();
+        final Point point = factory.createPoint(coordinate);
+        final Geometry geometry = ST_PrecisionReducer.precisionReducer(point, 15);
+        factory.getPrecisionModel().makePrecise(coordinate);
+        return point;
     }
 }

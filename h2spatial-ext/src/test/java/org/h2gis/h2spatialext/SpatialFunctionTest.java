@@ -1146,6 +1146,17 @@ public class SpatialFunctionTest {
     }
 
     @Test
+    public void test_ST_ClosestPointInsersects() throws Exception {
+        ResultSet rs = st.executeQuery("SELECT ST_INTERSECTS(" +
+                "'LINESTRING (152 71, 222 83, 220 87)'," +
+                "ST_CLOSESTPOINT('LINESTRING (152 71, 222 83, 220 87)'," +
+                                "'POINT (188 93)'));");
+        assertTrue(rs.next());
+        assertFalse(rs.next());
+        rs.close();
+    }
+
+    @Test
     public void test_ST_DelaunayWithPoints1() throws Exception {
         ResultSet rs = st.executeQuery("SELECT ST_Delaunay('MULTIPOINT ((0 0 1), (10 0 1), (10 10 1))'::GEOMETRY);");
         rs.next();

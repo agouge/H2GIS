@@ -58,6 +58,9 @@ public class ST_Intersects extends DeterministicScalarFunction {
         if(testGeometry==null) {
             return false;
         }
+        final double distance = surface.distance(testGeometry);
+        final int maximumSignificantDigits = surface.getPrecisionModel().getMaximumSignificantDigits();
+        final int compare = Double.compare(distance, Math.pow(10, -maximumSignificantDigits));
         return surface.intersects(testGeometry);
     }
 }
