@@ -1834,11 +1834,20 @@ public class SpatialFunctionTest {
     }
 
     @Test
+    public void test_ST_MakeEnvelopeLessSimple() throws Exception {
+        ResultSet rs = st.executeQuery("SELECT ST_MakeEnvelope(0, -1, 2, 3);");
+        rs.next();
+        assertTrue(((Geometry) rs.getObject(1)).equalsExact(
+                WKT_READER.read("POLYGON((0 -1, 2 -1, 2 3, 0 3, 0 -1))")));
+        rs.close();
+    }
+
+    @Test
     public void test_ST_MakeEnvelopeSRID() throws Exception {
         ResultSet rs = st.executeQuery("SELECT ST_MakeEnvelope(0,0, 1, 1, 4326);");
         rs.next();
         assertTrue(((Geometry) rs.getObject(1)).equalsExact(
-                WKT_READER.read("POLYGON((0 0, 1 0 0, 1 1 , 0 1, 0 0))")));
+                WKT_READER.read("POLYGON((0 0, 1 0, 1 1 , 0 1, 0 0))")));
         assertTrue(((Geometry) rs.getObject(1)).getSRID() == 4326);
         rs.close();
     }

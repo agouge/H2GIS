@@ -67,13 +67,13 @@ public class ST_MakeEnvelope extends DeterministicScalarFunction {
             new Coordinate(xmin, ymax),
             new Coordinate(xmin, ymin)
         };
-        return GF.createPolygon(GF.createLinearRing(coordinates), null);
+        return GF.createPolygon(GF.createLinearRing(coordinates));
     }
 
     /**
      * Creates a rectangular Polygon formed from the minima and maxima by the
-     * given shell.
-     * The user can set a srid.
+     * given shell. The user can set an srid.
+     *
      * @param xmin X min
      * @param ymin Y min
      * @param xmax X max
