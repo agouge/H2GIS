@@ -28,9 +28,10 @@ import com.vividsolutions.jts.operation.overlay.snap.GeometrySnapper;
 import org.h2gis.h2spatialapi.DeterministicScalarFunction;
 
 /**
- * Snaps two geometries together with a given tolerance
+ * Snaps two geometries together with a given snap tolerance.
  *
  * @author Erwan Bocher
+ * @author Adam Gouge
  */
 public class ST_Snap extends DeterministicScalarFunction {
 
@@ -44,15 +45,14 @@ public class ST_Snap extends DeterministicScalarFunction {
     }
 
     /**
-     * Snaps two geometries together with a given tolerance
+     * Snaps Geometry A to Geometry B.
      *
-     * @param geometryA a geometry to snap
-     * @param geometryB a geometry to snap
-     * @param snapTolerance the tolerance to use
-     * @return the snapped geometries
+     * @param geometryA Geometry to snap
+     * @param geometryB Geometry to snap to
+     * @param snapTolerance Snap tolerance to use
+     * @return The result of snapping Geometry A to Geometry B
      */
-    public static Geometry snap(Geometry geometryA, Geometry geometryB, double distance) {
-        Geometry[] snapped = GeometrySnapper.snap(geometryA, geometryB, distance);
-        return snapped[0];
+    public static Geometry snap(Geometry geometryA, Geometry geometryB, double snapTolerance) {
+        return new GeometrySnapper(geometryA).snapTo(geometryB, snapTolerance);
     }
 }
