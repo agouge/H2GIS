@@ -23,27 +23,17 @@
  */
 package org.h2gis.h2spatialext.function.spatial.processing;
 
-import com.vividsolutions.jts.geom.Coordinate;
-import com.vividsolutions.jts.geom.Geometry;
-import com.vividsolutions.jts.geom.GeometryFactory;
-import com.vividsolutions.jts.geom.LineString;
-import com.vividsolutions.jts.geom.MultiLineString;
-import com.vividsolutions.jts.geom.MultiPolygon;
-import com.vividsolutions.jts.geom.Point;
-import com.vividsolutions.jts.geom.Polygon;
+import com.vividsolutions.jts.geom.*;
 import com.vividsolutions.jts.operation.distance.GeometryLocation;
 import com.vividsolutions.jts.operation.polygonize.Polygonizer;
 import com.vividsolutions.jts.operation.union.UnaryUnionOp;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
 import org.h2gis.drivers.utility.CoordinatesUtils;
 import org.h2gis.h2spatialapi.DeterministicScalarFunction;
 import org.h2gis.h2spatialext.function.spatial.convert.ST_ToMultiSegments;
 import org.h2gis.h2spatialext.function.spatial.edit.EditUtilities;
+
+import java.sql.SQLException;
+import java.util.*;
 
 /**
  * This function split a line by a line a line by a point a polygon by a line
@@ -77,7 +67,7 @@ public class ST_Split extends DeterministicScalarFunction {
      * @throws SQLException
      */
     public static Geometry split(Geometry geomA, Geometry geomB) throws SQLException {
-        if (geomA instanceof Polygon) {
+        if (geomA instanceof Polygon && geomB instanceof LineString) {
             return splitPolygonWithLine((Polygon) geomA, (LineString) geomB);
         } else if (geomA instanceof LineString) {
             if (geomB instanceof LineString) {
@@ -98,7 +88,7 @@ public class ST_Split extends DeterministicScalarFunction {
     /**
      * Split a geometry a according a geometry b using a snapping tolerance.
      *
-     * This function support only the operations :
+     * This function supports only the operations:
      *
      * - split a line or a multiline with a point.
      *
@@ -302,22 +292,22 @@ public class ST_Split extends DeterministicScalarFunction {
     }
 
     /**
-     * Splits the specified lineString with another lineString.
+     * Splits the specified LineString with another LineString.
      *
-     * @param lineString
-     * @param lineString
-     *
+     * @param input Input LineString
+     * @param cut   Cutter LineString
+     * @return Result of splitting
      */
     private static Geometry splitLineStringWithLine(LineString input, LineString cut) {
         return input.difference(cut);
     }
 
     /**
-     * Splits the specified MultiLineString with another lineString.
+     * Splits the specified MultiLineString with another LineString.
      *
-     * @param MultiLineString
-     * @param lineString
-     *
+     * @param input Input LineString
+     * @param cut   Cutter LineString
+     * @return Result of splitting
      */
     private static MultiLineString splitMultiLineStringWithLine(MultiLineString input, LineString cut) {
         ArrayList<Geometry> geometries = new ArrayList<Geometry>();
