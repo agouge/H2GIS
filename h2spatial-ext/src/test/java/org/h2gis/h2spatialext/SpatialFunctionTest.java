@@ -2251,11 +2251,8 @@ public class SpatialFunctionTest {
 
     @Test
     public void test_ST_Reverse3DLine1() throws Exception {
-        st.execute("DROP TABLE IF EXISTS input_table,grid;"
-                + "CREATE TABLE input_table(the_geom LINESTRING);"
-                + "INSERT INTO input_table VALUES"
-                + "(ST_GeomFromText('LINESTRING (105 353 10, 150 180, 300 280 0)'));");
-        ResultSet rs = st.executeQuery("SELECT ST_Reverse3DLine('LINESTRING (105 353 10, 150 180, 300 280 0)'::GEOMETRY);");
+        ResultSet rs = st.executeQuery("SELECT ST_Reverse3DLine(" +
+                "'LINESTRING (105 353 10, 150 180, 300 280 0)');");
         rs.next();
         assertGeometryEquals("LINESTRING (300 280 0, 150 180,105 353 10)", rs.getBytes(1));
         rs.close();
@@ -2263,7 +2260,8 @@ public class SpatialFunctionTest {
 
     @Test
     public void test_ST_Reverse3DLine2() throws Exception {
-        ResultSet rs = st.executeQuery("SELECT ST_Reverse3DLine('LINESTRING (300 280 10, 150 180,105 353 0 )'::GEOMETRY);");
+        ResultSet rs = st.executeQuery("SELECT ST_Reverse3DLine(" +
+                "'LINESTRING (300 280 10, 150 180,105 353 0 )');");
         rs.next();
         assertGeometryEquals("LINESTRING (105 353 0, 150 180, 300 280 10)", rs.getBytes(1));
         rs.close();
@@ -2271,11 +2269,8 @@ public class SpatialFunctionTest {
 
     @Test
     public void test_ST_Reverse3DLine3() throws Exception {
-        st.execute("DROP TABLE IF EXISTS input_table,grid;"
-                + "CREATE TABLE input_table(the_geom LINESTRING);"
-                + "INSERT INTO input_table VALUES"
-                + "(ST_GeomFromText('LINESTRING (105 353 10, 150 180, 300 280 0)'));");
-        ResultSet rs = st.executeQuery("SELECT ST_Reverse3DLine('LINESTRING (105 353 10, 150 180, 300 280 0)'::GEOMETRY, 'desc');");
+        ResultSet rs = st.executeQuery("SELECT ST_Reverse3DLine(" +
+                "'LINESTRING (105 353 10, 150 180, 300 280 0)', 'desc');");
         rs.next();
         assertGeometryEquals("LINESTRING (105 353 10, 150 180, 300 280 0)", rs.getBytes(1));
         rs.close();
@@ -2283,7 +2278,8 @@ public class SpatialFunctionTest {
 
     @Test
     public void test_ST_Reverse3DLine4() throws Exception {
-        ResultSet rs = st.executeQuery("SELECT ST_Reverse3DLine('LINESTRING (105 353 0, 150 180, 300 280 10)'::GEOMETRY, 'desc');");
+        ResultSet rs = st.executeQuery("SELECT ST_Reverse3DLine(" +
+                "'LINESTRING (105 353 0, 150 180, 300 280 10)', 'desc');");
         rs.next();
         assertGeometryEquals("LINESTRING (300 280 10, 150 180,105 353 0 )", rs.getBytes(1));
         rs.close();
@@ -2291,7 +2287,8 @@ public class SpatialFunctionTest {
 
     @Test
     public void test_ST_Reverse3DLine5() throws Exception {
-        ResultSet rs = st.executeQuery("SELECT ST_Reverse3DLine('POLYGON ((190 300, 140 180, 300 110, 313 117, 430 270, 380 430, 190 300))'::GEOMETRY);");
+        ResultSet rs = st.executeQuery("SELECT ST_Reverse3DLine(" +
+                "'POLYGON ((190 300, 140 180, 300 110, 313 117, 430 270, 380 430, 190 300))');");
         rs.next();
         assertNull(rs.getObject(1));
         rs.close();
