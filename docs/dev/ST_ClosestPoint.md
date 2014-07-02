@@ -32,15 +32,11 @@ Returns the point of `geomA` closest to `geomB` using 2D distances
 
 ### Examples
 
-| geomA Point | geomB Polygon                  |
-|-------------|--------------------------------|
-| POINT(4 8)  | LINESTRING(1 2, 3 6, 5 7, 4 1) |
-
 {% highlight mysql %}
-SELECT  ST_ClosestPoint(geomA, geomB);
+SELECT  ST_ClosestPoint(POINT(4 8), LINESTRING(1 2, 3 6, 5 7, 4 1));
 -- Answer: POINT(4 8)
 
-SELECT  ST_ClosestPoint(geomB, geomA);
+SELECT  ST_ClosestPoint(LINESTRING(1 2, 3 6, 5 7, 4 1), POINT(4 8));
 -- Answer: POINT(4.6 6.8)
 {% endhighlight %}
 
@@ -48,7 +44,7 @@ SELECT  ST_ClosestPoint(geomB, geomA);
 
 {% highlight mysql %}
 SELECT  ST_ClosestPoint('POLYGON((0 0, 10 0, 10 5, 0 5, 0 0))',
-    'POINT(4 2)');
+                        'POINT(4 2)');
 -- Answer: POINT(4 2)
 {% endhighlight %}
 
@@ -56,7 +52,7 @@ SELECT  ST_ClosestPoint('POLYGON((0 0, 10 0, 10 5, 0 5, 0 0))',
 
 {% highlight mysql %}
 SELECT  ST_ClosestPoint('POLYGON((0 0, 10 0, 10 5, 0 5, 0 0))',
-    'POINT(5 7)');
+                        'POINT(5 7)');
 -- Answer: POINT(5 5)
 {% endhighlight %}
 
