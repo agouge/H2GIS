@@ -1,15 +1,11 @@
 ---
 ---
 [
-    {% for post in site.pages %}
+    {% for p in site.pages %}
     {
-      "title"    : "{{ post.title }}",
-      "href"     : "{{ post.url }}",
-      "date"     : {
-         "day"   : "{{ post.date | date: "%d" }}",
-         "month" : "{{ post.date | date: "%B" }}",
-         "year"  : "{{ post.date | date: "%Y" }}"
-      }
+      "title"       : "{{ p.title }}",
+      "href"        : "{{ p.url }}",
+      "description" : "{{ p.description }}"
     }
     {% unless forloop.last %},{% endunless %}
     {% endfor %}
