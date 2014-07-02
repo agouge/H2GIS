@@ -23,16 +23,14 @@ Computes the difference between `geomA` and `geomB`.
 
 ### Examples
 
-| geomA Polygon                      | geomB Polygon                      |
-|------------------------------------|------------------------------------|
-| POLYGON((1 1, 7 1, 7 6, 1 6, 1 1)) | POLYGON((3 2, 8 2, 8 8, 3 8, 3 2)) |
-
 {% highlight mysql %}
-SELECT ST_Difference(geomA, geomB) FROM input_table;
--- Answer:    POLYGON((1 1, 7 1, 7 2, 3 2, 3 6, 1 6, 1 1))
+SELECT ST_Difference('POLYGON((1 1, 7 1, 7 6, 1 6, 1 1))',
+                     'POLYGON((3 2, 8 2, 8 8, 3 8, 3 2))');
+-- Answer:            POLYGON((1 1, 7 1, 7 2, 3 2, 3 6, 1 6, 1 1))
 
-SELECT ST_Difference(geomB, geomA) FROM input_table;
--- Answer:    POLYGON((7 2, 8 2, 8 8, 3 8, 3 6, 7 6, 7 2))
+SELECT ST_Difference('POLYGON((3 2, 8 2, 8 8, 3 8, 3 2))',
+                     'POLYGON((1 1, 7 1, 7 6, 1 6, 1 1))');
+-- Answer:            POLYGON((7 2, 8 2, 8 8, 3 8, 3 6, 7 6, 7 2))
 {% endhighlight %}
 
 <img class="displayed" src="../ST_Difference.png"/>
