@@ -34,5 +34,6 @@ SELECT ST_TriangleDirection('POLYGON((0 0 0, 4 0 0, 2 3 6, 0 0 0))');
 ##### See also
 
 * [`ST_TriangleAspect`](../ST_TriangleAspect),
-[`ST_TriangleContouring`](../ST_TriangleContouring), [`ST_TriangleSlope`](../ST_TriangleSlope)
+  [`ST_TriangleContouring`](../ST_TriangleContouring),
+  [`ST_TriangleSlope`](../ST_TriangleSlope)
 * <a href="https://github.com/irstv/H2GIS/blob/master/h2spatial-ext/src/main/java/org/h2gis/h2spatialext/function/spatial/topography/ST_TriangleDirection.java" target="_blank">Source code</a>

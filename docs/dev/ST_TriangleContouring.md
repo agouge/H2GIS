@@ -76,5 +76,6 @@ SELECT * FROM ST_TriangleContouring('TIN', 'm1', 'm2', 'm3', 2, 3, 5);
 ##### See also
 
 * [`ST_TriangleAspect`](../ST_TriangleAspect),
-[`ST_TriangleDirection`](../ST_TriangleDirection), [`ST_TriangleSlope`](../ST_TriangleSlope)
+  [`ST_TriangleDirection`](../ST_TriangleDirection),
+  [`ST_TriangleSlope`](../ST_TriangleSlope)
 * <a href="https://github.com/irstv/H2GIS/blob/master/h2spatial-ext/src/main/java/org/h2gis/h2spatialext/function/spatial/topography/ST_TriangleContouring.java" target="_blank">Source code</a>
