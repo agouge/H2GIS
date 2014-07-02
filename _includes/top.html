@@ -47,7 +47,7 @@
           if (e != "")
           {
               $.each(searchJSON, function(t, n) {
-                  var r = n.title, i = n.title.toLowerCase(), s = n.href, o = n.date;
+                  var r = n.title, i = n.title.toLowerCase(), s = n.href, o = n.description;
                   i.indexOf(e)!==-1 && results.push([r, s, o])
               });
 
