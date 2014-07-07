@@ -34,7 +34,7 @@ destination.
 | `o`           | Global orientation string: `directed`, `reversed` or `undirected`                                                                                                                     |
 | `eo`          | Edge orientation column name indicating individual edge orientations: `1` (directed), `-1` (reversed) or `0` (undirected); required if global orientation is `directed` or `reversed` |
 | `w`           | Edge weights column name                                                                                                                                                              |
-| `ds`          | Comma-separated destination string: `'dest1, dest2, ...'`                                                                                                                             |
+| `ds`          | Comma-separated destination ID string: `'dest1, dest2, ...'`                                                                                                                          |
 | `dt`          | Destination table name; must contain column `DESTINATION` containing integer vertex ids                                                                                               |
 
 <div class="note">
