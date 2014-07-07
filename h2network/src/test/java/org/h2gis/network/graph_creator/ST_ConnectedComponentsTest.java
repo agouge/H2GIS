@@ -155,6 +155,25 @@ public class ST_ConnectedComponentsTest {
                 getEdgePartition(st.executeQuery("SELECT * FROM " + name + EDGE_COMP_SUFFIX)));
     }
 
+    @Test
+    public void testSingleEdgeGraph() throws Exception {
+        st.execute("DROP TABLE IF EXISTS INPUT;");
+        st.execute("CREATE TABLE INPUT AS SELECT " +
+                "1 EDGE_ID, 1 START_NODE, 2 END_NODE, 1 EDGE_ORIENTATION;");
+        checkBoolean(st.executeQuery("CALL ST_ConnectedComponents(" +
+                "'INPUT', 'directed - EDGE_ORIENTATION');"));
+        // Each node is in its own strongly connected component:
+        Set<Set<Integer>> nodesP = new HashSet<Set<Integer>>();
+        nodesP.add(getIntSet(1));
+        nodesP.add(getIntSet(2));
+        assertEquals(nodesP,
+                getVertexPartition(st.executeQuery("SELECT * FROM INPUT" + NODE_COMP_SUFFIX)));
+        // The edge is in no strongly connected component:
+        assertEquals(getIntSet(1),
+                getCCMap(st.executeQuery("SELECT * FROM INPUT" + EDGE_COMP_SUFFIX),
+                        GraphConstants.EDGE_ID).get(NULL_CONNECTED_COMPONENT_NUMBER));
+    }
+
     private Set<Set<Integer>> getOneElementPartition(int n) {
         Set<Set<Integer>> p = new HashSet<Set<Integer>>();
         Set<Integer> component = new HashSet<Integer>();
