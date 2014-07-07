@@ -3,6 +3,7 @@ layout: docs
 title: ST_Densify
 category: geom2D/edit-geometries
 is_function: true
+comments: true
 description: Insert extra vertices along the line segments of a Geometry
 prev_section: ST_AddPoint
 next_section: ST_Normalize

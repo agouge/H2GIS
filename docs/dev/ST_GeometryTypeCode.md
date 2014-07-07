@@ -3,6 +3,7 @@ layout: docs
 title: ST_GeometryTypeCode
 category: geom2D/geometry-conversion
 is_function: true
+comments: true
 description: Return the OGC SFS type code of a Geometry
 prev_section: ST_GeomFromText
 next_section: ST_Holes

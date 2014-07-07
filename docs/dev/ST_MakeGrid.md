@@ -3,6 +3,7 @@ layout: docs
 title: ST_MakeGrid
 category: geom2D/geometry-creation
 is_function: true
+comments: true
 description: Calculate a regular grid of <code>POLYGON</code>s based on a Geometry or a table of Geometries
 prev_section: ST_MakeEnvelope
 next_section: ST_MakeGridPoints

@@ -3,6 +3,7 @@ layout: docs
 title: ST_MLineFromText
 category: geom2D/geometry-conversion
 is_function: true
+comments: true
 description: Well Known Text &rarr; <code>MULTILINESTRING</code>
 prev_section: ST_LineFromWKB
 next_section: ST_MPointFromText

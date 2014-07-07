@@ -3,6 +3,7 @@ layout: docs
 title: ST_GraphAnalysis
 category: applications/h2network
 is_function: true
+comments: true
 description: Calculate closeness/betweenness centrality of vertices and edges
 prev_section: ST_Graph
 next_section: ST_ShortestPath

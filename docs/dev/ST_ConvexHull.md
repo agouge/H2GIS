@@ -3,6 +3,7 @@ layout: docs
 title: ST_ConvexHull
 category: geom2D/operators
 is_function: true
+comments: true
 description: Compute the smallest convex <code>POLYGON</code> that contains all the points in the Geometry
 prev_section: ST_Buffer
 next_section: ST_Difference

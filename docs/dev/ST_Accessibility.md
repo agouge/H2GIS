@@ -3,6 +3,7 @@ layout: docs
 title: ST_Accessibility
 category: applications/h2network
 is_function: true
+comments: true
 description: Calculate, from each vertex, the (distance to the) closest destination
 prev_section: h2network
 next_section: ST_ConnectedComponents

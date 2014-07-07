@@ -3,6 +3,7 @@ layout: docs
 title: ST_TriangleSlope
 category: geom3D/topography
 is_function: true
+comments: true
 description:
 prev_section: ST_TriangleDirection
 next_section: geom3D/triangulation

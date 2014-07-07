@@ -3,6 +3,7 @@ layout: docs
 title: ST_IsValidReason
 category: geom2D/properties
 is_function: true
+comments: true
 description: Return text stating if a geometry is valid or not and if not valid, a reason why
 prev_section: ST_IsValidDetail
 next_section: ST_NumGeometries

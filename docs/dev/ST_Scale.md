@@ -3,6 +3,7 @@ layout: docs
 title: ST_Scale
 category: geom2D/affine-transformations
 is_function: true
+comments: true
 description: Scale a Geometry by multiplying the ordinates by the indicated scale factors
 prev_section: ST_Rotate
 next_section: ST_Translate

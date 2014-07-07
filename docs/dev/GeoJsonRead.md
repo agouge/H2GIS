@@ -3,6 +3,7 @@ layout: docs
 title: GeoJsonRead
 category: h2drivers
 is_function: true
+comments: true
 description: GeoJSON &rarr; Table
 prev_section: GPXRead
 next_section: GeoJsonWrite

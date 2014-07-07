@@ -3,6 +3,7 @@ layout: docs
 title: ST_IsValidDetail
 category: geom2D/properties
 is_function: true
+comments: true
 description: Return a valid detail as an array of objects
 prev_section: ST_IsValid
 next_section: ST_IsValidReason

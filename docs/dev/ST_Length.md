@@ -3,6 +3,7 @@ layout: docs
 title: ST_Length
 category: geom2D/distance-functions
 is_function: true
+comments: true
 description: Return the length of a Geometry
 prev_section: ST_FurthestCoordinate
 next_section: ST_LocateAlong

@@ -3,6 +3,7 @@ layout: docs
 title: ST_ZMin
 category: geom3D/properties
 is_function: true
+comments: true
 description: Return the minimum z-value of a Geometry
 prev_section: ST_ZMax
 next_section: geom3D/topography

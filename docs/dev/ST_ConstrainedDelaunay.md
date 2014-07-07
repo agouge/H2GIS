@@ -3,6 +3,7 @@ layout: docs
 title: ST_ConstrainedDelaunay
 category: geom3D/triangulation
 is_function: true
+comments: true
 description:
 prev_section: geom3D/triangulation
 next_section: ST_Delaunay

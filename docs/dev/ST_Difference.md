@@ -3,6 +3,7 @@ layout: docs
 title: ST_Difference
 category: geom2D/operators
 is_function: true
+comments: true
 description: Compute the difference between two geometries
 prev_section: ST_ConvexHull
 next_section: ST_Intersection

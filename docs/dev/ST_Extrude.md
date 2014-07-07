@@ -3,6 +3,7 @@ layout: docs
 title: ST_Extrude
 category: geom3D/geometry-creation
 is_function: true
+comments: true
 description: Extrude a geometry
 prev_section: geom3D/geometry-creation
 next_section: geom3D/edit-geometries

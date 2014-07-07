@@ -3,6 +3,7 @@ layout: docs
 title: ST_MinimumDiameter
 category: geom2D/geometry-creation
 is_function: true
+comments: true
 description: Return the minimum diameter of a Geometry
 prev_section: ST_MakePolygon
 next_section: ST_MinimumRectangle

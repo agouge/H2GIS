@@ -3,6 +3,7 @@ layout: docs
 title: ST_Reverse
 category: geom2D/edit-geometries
 is_function: true
+comments: true
 description: Reverse the vertex order of a Geometry
 prev_section: ST_RemoveRepeatedPoints
 next_section: geom2D/distance-functions

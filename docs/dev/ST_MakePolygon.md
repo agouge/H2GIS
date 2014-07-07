@@ -3,6 +3,7 @@ layout: docs
 title: ST_MakePolygon
 category: geom2D/geometry-creation
 is_function: true
+comments: true
 description: <code>LINESTRING</code> &rarr; <code>POLYGON</code>
 prev_section: ST_MakePoint
 next_section: ST_MinimumDiameter

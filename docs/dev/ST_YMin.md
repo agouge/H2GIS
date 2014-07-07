@@ -3,6 +3,7 @@ layout: docs
 title: ST_YMin
 category: geom2D/properties
 is_function: true
+comments: true
 description: Return the minimum y-value of a Geometry
 prev_section: ST_YMax
 next_section: geom2D/trigonometry

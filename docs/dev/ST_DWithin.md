@@ -3,6 +3,7 @@ layout: docs
 title: ST_DWithin
 category: geom2D/predicates
 is_function: true
+comments: true
 description: Return true if the Geometries are within the specified distance of one another
 prev_section: ST_Crosses
 next_section: ST_Disjoint

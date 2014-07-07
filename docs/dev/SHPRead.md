@@ -3,6 +3,7 @@ layout: docs
 title: SHPRead
 category: h2drivers
 is_function: true
+comments: true
 description: SHP &rarr; Table
 prev_section: KMLWrite
 next_section: SHPWrite

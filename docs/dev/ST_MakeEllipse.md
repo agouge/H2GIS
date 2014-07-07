@@ -3,6 +3,7 @@ layout: docs
 title: ST_MakeEllipse
 category: geom2D/geometry-creation
 is_function: true
+comments: true
 description: Construct an ellipse
 prev_section: ST_Expand
 next_section: ST_MakeEnvelope

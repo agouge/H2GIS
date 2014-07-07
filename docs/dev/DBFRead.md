@@ -3,6 +3,7 @@ layout: docs
 title: DBFRead
 category: h2drivers
 is_function: true
+comments: true
 description: DBF &rarr; Table
 prev_section: CSVWrite
 next_section: DBFWrite

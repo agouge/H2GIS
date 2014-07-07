@@ -3,6 +3,7 @@ layout: docs
 title: ST_Force2D
 category: geom2D/geometry-conversion
 is_function: true
+comments: true
 description: 3D Geometry &rarr; 2D Geometry
 prev_section: ST_AsWKT
 next_section: ST_GeomFromText

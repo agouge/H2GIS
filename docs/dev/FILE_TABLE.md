@@ -3,6 +3,7 @@ layout: docs
 title: FILE_TABLE
 category: h2drivers
 is_function: true
+comments: true
 description: Link a table to a file
 prev_section: DBFWrite
 next_section: GPXRead

@@ -3,6 +3,7 @@ layout: docs
 title: ST_ZUpdateLineExtremities
 category: geom3D/edit-geometries
 is_function: true
+comments: true
 description: Update the start and end <i>z</i>-values of a Geometry
 prev_section: ST_UpdateZ
 next_section: geom3D/distance-functions

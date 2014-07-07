@@ -3,6 +3,7 @@ layout: docs
 title: ST_AsGeoJson
 category: h2drivers
 is_function: true
+comments: true
 description: Geometry &rarr; GeoJSON
 prev_section: SHPWrite
 next_section: ST_AsKML

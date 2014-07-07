@@ -3,6 +3,7 @@ layout: docs
 title: ST_Envelope
 category: geom2D/properties
 is_function: true
+comments: true
 description: Return a Geometry's envelope as a Geometry
 prev_section: ST_EndPoint
 next_section: ST_Explode

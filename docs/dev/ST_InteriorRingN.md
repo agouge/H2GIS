@@ -3,6 +3,7 @@ layout: docs
 title: ST_InteriorRingN
 category: geom2D/properties
 is_function: true
+comments: true
 description: Return the <i>n</i>th interior ring of a <code>POLYGON</code>
 prev_section: ST_GeometryType
 next_section: ST_IsClosed

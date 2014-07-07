@@ -3,6 +3,7 @@ layout: docs
 title: ST_ToMultiSegments
 category: geom2D/geometry-conversion
 is_function: true
+comments: true
 description: <code>GEOMETRY(COLLECTION)</code> &rarr; <code>MULTILINESTRING</code>
 prev_section: ST_ToMultiPoint
 next_section: geom2D/geometry-creation

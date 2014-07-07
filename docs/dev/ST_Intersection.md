@@ -3,6 +3,7 @@ layout: docs
 title: ST_Intersection
 category: geom2D/operators
 is_function: true
+comments: true
 description: Compute the intersection of two Geometries
 prev_section: ST_Difference
 next_section: ST_SymDifference

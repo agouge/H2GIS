@@ -3,6 +3,7 @@ layout: docs
 title: ST_Crosses
 category: geom2D/predicates
 is_function: true
+comments: true
 description: Return true if Geometry A crosses Geometry B
 prev_section: ST_Covers
 next_section: ST_DWithin

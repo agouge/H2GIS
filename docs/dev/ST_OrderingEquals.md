@@ -3,6 +3,7 @@ layout: docs
 title: ST_OrderingEquals
 category: geom2D/predicates
 is_function: true
+comments: true
 description: Returns <code>TRUE</code> if Geometry A equals Geometry B and their coordinates and component Geometries are listed in the same order
 prev_section: ST_Intersects
 next_section: ST_Overlaps

@@ -3,6 +3,7 @@ layout: docs
 title: ST_IsRectangle
 category: geom2D/properties
 is_function: true
+comments: true
 description: Return true if the Geometry is a rectangle
 prev_section: ST_IsEmpty
 next_section: ST_IsRing

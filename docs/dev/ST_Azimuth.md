@@ -3,6 +3,7 @@ layout: docs
 title: ST_Azimuth
 category: geom2D/trigonometry
 is_function: true
+comments: true
 description: Return the azimuth of the segment from point A to point B
 prev_section: geom2D/trigonometry
 next_section: geom3D

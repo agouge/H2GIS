@@ -3,6 +3,7 @@ layout: docs
 title: ST_TriangleContouring
 category: geom3D/topography
 is_function: true
+comments: true
 description:
 prev_section: ST_TriangleAspect
 next_section: ST_TriangleDirection

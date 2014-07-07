@@ -3,6 +3,7 @@ layout: docs
 title: GPXRead
 category: h2drivers
 is_function: true
+comments: true
 description: GPX &rarr; Table
 prev_section: FILE_TABLE
 next_section: GeoJsonRead

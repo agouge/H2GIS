@@ -3,6 +3,7 @@ layout: docs
 title: ST_AddPoint
 category: geom2D/edit-geometries
 is_function: true
+comments: true
 description: Add a point to a Geometry
 prev_section: geom2D/edit-geometries
 next_section: ST_Densify

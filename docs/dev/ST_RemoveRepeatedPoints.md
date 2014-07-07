@@ -3,6 +3,7 @@ layout: docs
 title: ST_RemoveRepeatedPoints
 category: geom2D/edit-geometries
 is_function: true
+comments: true
 description: Remove repeated points from a Geometry
 prev_section: ST_RemovePoint
 next_section: ST_Reverse

@@ -3,6 +3,7 @@ layout: docs
 title: ST_Within
 category: geom2D/predicates
 is_function: true
+comments: true
 description: Return true if Geometry A is within Geometry B
 prev_section: ST_Touches
 next_section: geom2D/process-geometries

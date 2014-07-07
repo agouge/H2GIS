@@ -3,6 +3,7 @@ layout: docs
 title: GeoJsonWrite
 category: h2drivers
 is_function: true
+comments: true
 description: Table &rarr; GeoJSON
 prev_section: GeoJsonRead
 next_section: KMLWrite

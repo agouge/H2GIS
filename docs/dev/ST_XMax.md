@@ -3,6 +3,7 @@ layout: docs
 title: ST_XMax
 category: geom2D/properties
 is_function: true
+comments: true
 description: Return the maximum x-value of a Geometry
 prev_section: ST_X
 next_section: ST_XMin

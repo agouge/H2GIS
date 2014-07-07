@@ -3,6 +3,7 @@ layout: docs
 title: ST_MakeGridPoints
 category: geom2D/geometry-creation
 is_function: true
+comments: true
 description: Calculate a regular grid of <code>POINT</code>s based on a Geometry or a table of Geometries
 prev_section: ST_MakeGrid
 next_section: ST_MakeLine

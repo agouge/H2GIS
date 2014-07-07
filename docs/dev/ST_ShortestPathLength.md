@@ -3,6 +3,7 @@ layout: docs
 title: ST_ShortestPathLength
 category: applications/h2network
 is_function: true
+comments: true
 description: Calculate length(s) of shortest path(s) between vertices in a graph
 prev_section: ST_ShortestPath
 next_section:

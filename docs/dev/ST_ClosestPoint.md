@@ -3,6 +3,7 @@ layout: docs
 title: ST_ClosestPoint
 category: geom2D/distance-functions
 is_function: true
+comments: true
 description: Return the point of Geometry A closest to Geometry B
 prev_section: ST_ClosestCoordinate
 next_section: ST_FurthestCoordinate

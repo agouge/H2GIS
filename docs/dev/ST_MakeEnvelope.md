@@ -3,6 +3,7 @@ layout: docs
 title: ST_MakeEnvelope
 category: geom2D/geometry-creation
 is_function: true
+comments: true
 description: Create a rectangular Polygon
 prev_section: ST_MakeEllipse
 next_section: ST_MakeGrid

@@ -3,6 +3,7 @@ layout: docs
 title: ST_AsKML
 category: h2drivers
 is_function: true
+comments: true
 description: Geometry &rarr; KML
 prev_section: ST_AsGeoJson
 next_section: spatial-indices

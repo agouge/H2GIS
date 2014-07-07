@@ -3,6 +3,7 @@ layout: docs
 title: ST_EnvelopesIntersect
 category: geom2D/predicates
 is_function: true
+comments: true
 description: Return true if the envelope of Geometry A intersects the envelope of Geometry B
 prev_section: ST_Disjoint
 next_section: ST_Equals

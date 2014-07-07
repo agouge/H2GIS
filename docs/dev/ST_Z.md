@@ -3,6 +3,7 @@ layout: docs
 title: ST_Z
 category: geom3D/properties
 is_function: true
+comments: true
 description: Return the z-value of the first coordinate of a Geometry
 prev_section: ST_Is3D
 next_section: ST_ZMax

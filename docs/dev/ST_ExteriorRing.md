@@ -3,6 +3,7 @@ layout: docs
 title: ST_ExteriorRing
 category: geom2D/properties
 is_function: true
+comments: true
 description: Return the exterior ring of a <code>POLYGON</code>
 prev_section: ST_Extent
 next_section: ST_GeometryN

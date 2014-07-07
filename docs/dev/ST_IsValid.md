@@ -3,6 +3,7 @@ layout: docs
 title: ST_IsValid
 category: geom2D/properties
 is_function: true
+comments: true
 description: Return true if the Geometry is valid
 prev_section: ST_IsSimple
 next_section: ST_IsValidDetail

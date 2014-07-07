@@ -3,6 +3,7 @@ layout: docs
 title: ST_Polygonize
 category: geom2D/process-geometries
 is_function: true
+comments: true
 description: Create a <code>MULTIPOLYGON</code> from edges of Geometries
 prev_section: geom2D/process-geometries
 next_section: ST_PrecisionReducer

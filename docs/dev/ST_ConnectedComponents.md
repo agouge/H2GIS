@@ -3,6 +3,7 @@ layout: docs
 title: ST_ConnectedComponents
 category: applications/h2network
 is_function: true
+comments: true
 description: Calculate the (strongly) connected components of a graph
 prev_section: ST_Accessibility
 next_section: ST_Graph

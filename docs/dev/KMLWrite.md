@@ -3,6 +3,7 @@ layout: docs
 title: KMLWrite
 category: h2drivers
 is_function: true
+comments: true
 description: KML, KMZ &rarr; Table
 prev_section: GeoJsonWrite
 next_section: SHPRead
