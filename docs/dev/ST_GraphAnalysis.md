@@ -24,6 +24,15 @@ ST_GraphAnalysis('INPUT_EDGES', 'o[ - eo]', 'w'); -- Weighted
 Calculates closeness and betweenness [centrality][wiki] for vertices
 and betweenness centrality for edges.
 
+##### Input parameters
+
+| Variable      | Meaning                                                                                                                                                                               |
+|---------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `INPUT_EDGES` | Edges table produced by `ST_Graph` from table `input`                                                                                                                                 |
+| `o`           | Global orientation string: `directed`, `reversed` or `undirected`                                                                                                                     |
+| `eo`          | Edge orientation column name indicating individual edge orientations: `1` (directed), `-1` (reversed) or `0` (undirected); required if global orientation is `directed` or `reversed` |
+| `w`           | Edge weights column name                                                                                                                                                              |
+
 <div class="note">
   <h5>All centrality scores are normalized.</h5>
 </div>
@@ -36,15 +45,6 @@ and betweenness centrality for edges.
   to make sure you're calling <code>ST_GraphAnalysis</code> on a
   single connected component.</p>
 </div>
-
-##### Input parameters
-
-| Variable      | Meaning                                                                                                                                                                               |
-|---------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `INPUT_EDGES` | Edges table produced by `ST_Graph` from table `input`                                                                                                                                 |
-| `o`           | Global orientation string: `directed`, `reversed` or `undirected`                                                                                                                     |
-| `eo`          | Edge orientation column name indicating individual edge orientations: `1` (directed), `-1` (reversed) or `0` (undirected); required if global orientation is `directed` or `reversed` |
-| `w`           | Edge weights column name                                                                                                                                                              |
 
 ### Examples
 

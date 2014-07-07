@@ -26,17 +26,6 @@ Calculates, for each vertex in a graph, the closest destination
 among several possible destinations as well as the distance to this
 destination.
 
-<div class="note">
-  <h5>Using this function will be faster than doing an equivalent
-  calculation using <a
-  href="../ST_ShortestPathLength"><code>ST_ShortestPathLength</code></a>.</h5>
-  <p><code>ST_Accessibility</code> is implemented as follows: The
-  graph is reversed, and Dijkstra's algorithm is run from each
-  destination vertex. This is much more efficient than running
-  Dijkstra's algorithm from each vertex to each destination and
-  taking the minimum distance.</p>
-</div>
-
 ##### Input parameters
 
 | Variable      | Meaning                                                                                                                                                                               |
@@ -47,6 +36,17 @@ destination.
 | `w`           | Edge weights column name                                                                                                                                                              |
 | `ds`          | Comma-separated destination string: `'dest1, dest2, ...'`                                                                                                                             |
 | `dt`          | Destination table name; must contain column `DESTINATION` containing integer vertex ids                                                                                               |
+
+<div class="note">
+  <h5>Using this function will be faster than doing an equivalent
+  calculation using <a
+  href="../ST_ShortestPathLength"><code>ST_ShortestPathLength</code></a>.</h5>
+  <p><code>ST_Accessibility</code> is implemented as follows: The
+  graph is reversed, and Dijkstra's algorithm is run from each
+  destination vertex. This is much more efficient than running
+  Dijkstra's algorithm from each vertex to each destination and
+  taking the minimum distance.</p>
+</div>
 
 ### Examples
 
