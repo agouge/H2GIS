@@ -35,7 +35,7 @@ destination.
 | `eo`          | Edge orientation column name indicating individual edge orientations: `1` (directed), `-1` (reversed) or `0` (undirected); required if global orientation is `directed` or `reversed` |
 | `w`           | Edge weights column name                                                                                                                                                              |
 | `ds`          | Comma-separated destination ID string: `'dest1, dest2, ...'`                                                                                                                          |
-| `dt`          | Destination table name; must contain column `DESTINATION` containing integer vertex ids                                                                                               |
+| `dt`          | Destination table name; must contain column `DESTINATION` containing integer vertex IDs                                                                                               |
 
 <div class="note">
   <h5>Using this function will be faster than doing an equivalent

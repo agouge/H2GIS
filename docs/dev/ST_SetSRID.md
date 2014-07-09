@@ -17,7 +17,7 @@ GEOMETRY ST_SetSRID(GEOMETRY geom, INT srid);
 
 ### Description
 
-Returns a copy of `geom` with spatial reference id set to `srid`.
+Returns a copy of `geom` with spatial reference ID set to `srid`.
 
 <div class="note warning">
   <h5>ST_SetSRID does not  to actually change the SRID of <code>geom</code>.

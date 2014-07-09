@@ -44,11 +44,11 @@ Geometry column is used. Returns `true` if the operation is successful.
   will be named <code>input_nodes</code> and <code>input_edges</code></h5>
   <p>The <code>input_nodes</code> table contains:</p>
   <ul>
-  <li>an integer id <code>node_id</code></li>
+  <li>an integer ID <code>node_id</code></li>
   <li>a <code>POINT</code> Geometry representing each node</li>
   </ul>
   <p>The <code>input_edges</code> table is a copy of the input table with three
-  extra integer id columns:</p>
+  extra integer ID columns:</p>
   <ul>
   <li><code>edge_id</code></li>
   <li><code>start_node</code></li>

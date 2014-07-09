@@ -37,8 +37,8 @@ a new ID for this path.
 | `o`           | Global orientation string: `directed`, `reversed` or `undirected`                                                                                                                     |
 | `eo`          | Edge orientation column name indicating individual edge orientations: `1` (directed), `-1` (reversed) or `0` (undirected); required if global orientation is `directed` or `reversed` |
 | `w`           | Edge weights column name                                                                                                                                                              |
-| `s`           | Source vertex id                                                                                                                                                                      |
-| `d`           | Destination vertex id                                                                                                                                                                 |
+| `s`           | Source vertex ID                                                                                                                                                                      |
+| `d`           | Destination vertex ID                                                                                                                                                                 |
 
 ### Examples
 
