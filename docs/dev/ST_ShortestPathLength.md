@@ -48,7 +48,7 @@ graph.
 | `s`           | Source vertex ID                                                                                                                                                                      |
 | `d`           | Destination vertex ID                                                                                                                                                                 |
 | `sdt`         | Source-Destination table name; must contain columns `SOURCE` and `DESTINATION` containing integer vertex IDs                                                                          |
-| `ds`          | Comma-separated destination ID string: `'dest1, dest2, ...'`                                                                                                                          |
+| `ds`          | Comma-separated destination ID string: `'dest1, dest2, ..., destN'`                                                                                                                   |
 
 ### Examples
 
