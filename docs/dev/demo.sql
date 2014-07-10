@@ -39,6 +39,58 @@ CREATE TABLE CORMEN_DISC_EDGES_ALL AS
     FROM CORMEN_DISC A, CORMEN_DISC_EDGES B
     WHERE A.ID=B.EDGE_ID;
 
+-- ____________________ ST_ConnectedComponents  ____________________
+
+CREATE TABLE CORMEN_EDGES_EO AS
+    SELECT B.*, A.EDGE_ORIENTATION
+    FROM CORMEN A, CORMEN_EDGES B
+    WHERE A.ID=B.EDGE_ID;
+
+-- SELECT * FROM CORMEN_EDGES_EO;
+--
+-- EDGE_ID  	START_NODE  	END_NODE  	EDGE_ORIENTATION
+-- 1	1	2	1
+-- 2	2	4	-1
+-- 3	2	3	1
+-- 4	3	2	1
+-- 5	1	3	1
+-- 6	3	4	1
+-- 7	3	5	1
+-- 8	4	5	1
+-- 9	5	4	1
+-- 10	5	1	0
+
+CALL ST_ConnectedComponents('CORMEN_EDGES_EO',
+        'directed - EDGE_ORIENTATION');
+
+-- On a strongly connected graph, we only have one strongly connected
+-- component.
+--
+-- SELECT * FROM CORMEN_EDGES_EO_NODE_CC;
+--
+-- NODE_ID  	CONNECTED_COMPONENT
+-- 1	1
+-- 2	1
+-- 3	1
+-- 4	1
+-- 5	1
+--
+-- TODO: Where is edge -10?
+--
+-- SELECT * FROM CORMEN_EDGES_EO_EDGE_CC;
+--
+-- EDGE_ID  	CONNECTED_COMPONENT
+-- 1	1
+-- 2	1
+-- 3	1
+-- 4	1
+-- 5	1
+-- 6	1
+-- 7	1
+-- 8	1
+-- 9	1
+-- 10	1
+
 -- ________________________ ST_ShortestPath ________________________
 
 SELECT * FROM
