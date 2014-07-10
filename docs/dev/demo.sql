@@ -171,3 +171,46 @@ CALL ST_GraphAnalysis('CORMEN_EDGES_ALL',
 -- 8	0.2857142857142857
 -- 9	0.8571428571428571
 -- 10	0.5714285714285714
+
+CALL ST_GraphAnalysis('CORMEN_DISC_EDGES_ALL',
+        'directed - EDGE_ORIENTATION',
+        'WEIGHT');
+
+-- Notice that
+-- * All closeness values are zero because the graph is not strongly connected
+-- * Vertex 5 is the vertex on the most shortest paths
+-- * Vertices 1, 6 and 8 have betweenness values of zero
+--
+-- SELECT * FROM CORMEN_DISC_EDGES_ALL_NODE_CENT ORDER BY BETWEENNESS DESC;
+--
+-- NODE_ID  	BETWEENNESS  	CLOSENESS
+-- 5	1.0	0.0
+-- 3	0.8333333333333334	0.0
+-- 2	0.3333333333333333	0.0
+-- 4	0.3333333333333333	0.0
+-- 7	0.16666666666666666	0.0
+-- 8	0.0	0.0
+-- 1	0.0	0.0
+-- 6	0.0	0.0
+--
+-- Notice that
+-- * Edge 7 is the edge on the most shortest paths
+-- * Edge 10 is on more shortest paths than edge -10
+-- * Edges 1 and 6 are on no shortest paths
+--
+-- SELECT * FROM CORMEN_DISC_EDGES_ALL_EDGE_CENT ORDER BY BETWEENNESS DESC;
+--
+-- EDGE_ID  	BETWEENNESS
+-- 7	1.0
+-- 9	0.8571428571428571
+-- 3	0.8571428571428571
+-- 10	0.5714285714285714
+-- 2	0.5714285714285714
+-- 5	0.42857142857142855
+-- 4	0.2857142857142857
+-- 8	0.2857142857142857
+-- 11	0.2857142857142857
+-- 12	0.2857142857142857
+-- -10	0.14285714285714285
+-- 6	0.0
+-- 1	0.0
