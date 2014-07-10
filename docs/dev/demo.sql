@@ -169,6 +169,34 @@ SELECT * FROM
 -- THE_GEOM  	EDGE_ID  	TREE_ID  	SOURCE  	DESTINATION  	WEIGHT
 -- LINESTRING (0 1, 1 0)	5	1	1	3	5.0
 
+-- In the next two examples, which SPT we obtain can be totally different
+-- depending on our starting vertex.
+
+SELECT * FROM
+    ST_ShortestPathTree('CORMEN_DISC_EDGES_ALL',
+        'directed - EDGE_ORIENTATION',
+        'WEIGHT', 1);
+
+-- We never make it to the other connected component.
+--
+-- THE_GEOM  	EDGE_ID  	TREE_ID  	SOURCE  	DESTINATION  	WEIGHT
+-- LINESTRING (1 0, 1.25 1, 1 2)	4	1	3	2	3.0
+-- LINESTRING (2 0, 2.25 1, 2 2)	9	2	5	4	6.0
+-- LINESTRING (0 1, 1 0)	5	3	1	3	5.0
+-- LINESTRING (2 0, 0 1)	-10	4	1	5	7.0
+-- LINESTRING (1 0, 2 0)	7	5	3	5	2.0
+
+SELECT * FROM
+    ST_ShortestPathTree('CORMEN_DISC_EDGES_ALL',
+        'directed - EDGE_ORIENTATION',
+        'WEIGHT', 6);
+
+-- We never make it to the other connected component.
+--
+-- THE_GEOM  	EDGE_ID  	TREE_ID  	SOURCE  	DESTINATION  	WEIGHT
+-- LINESTRING (3 1, 4 2)	11	1	6	7	1.0
+-- LINESTRING (4 2, 5 2)	12	2	7	8	2.0
+
 -- ________________________ ST_GraphAnalysis ________________________
 
 CALL ST_GraphAnalysis('CORMEN_EDGES_ALL',
