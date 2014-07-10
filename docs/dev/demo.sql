@@ -142,6 +142,23 @@ SELECT * FROM
 -- SOURCE  	DESTINATION  	DISTANCE
 -- 3	6	Infinity
 
+-- ______________________ ST_ShortestPathTree ______________________
+
+SELECT * FROM
+    ST_ShortestPathTree('CORMEN_EDGES_ALL',
+        'directed - EDGE_ORIENTATION',
+        'WEIGHT', 1);
+
+-- Notice this is not really a "tree" in the mathematical sense since there are
+-- two shortest paths from vertex 1 to vertex 5.
+--
+-- THE_GEOM  	EDGE_ID  	TREE_ID  	SOURCE  	DESTINATION  	WEIGHT
+-- LINESTRING (1 0, 1.25 1, 1 2)	4	1	3	2	3.0
+-- LINESTRING (2 0, 2.25 1, 2 2)	9	2	5	4	6.0
+-- LINESTRING (0 1, 1 0)	5	3	1	3	5.0
+-- LINESTRING (1 0, 2 0)	7	4	3	5	2.0
+-- LINESTRING (2 0, 0 1)	-10	5	1	5	7.0
+
 -- ________________________ ST_GraphAnalysis ________________________
 
 CALL ST_GraphAnalysis('CORMEN_EDGES_ALL',
