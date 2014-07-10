@@ -91,6 +91,62 @@ CALL ST_ConnectedComponents('CORMEN_EDGES_EO',
 -- 9	1
 -- 10	1
 
+CREATE TABLE CORMEN_DISC_EDGES_EO AS
+    SELECT B.*, A.EDGE_ORIENTATION
+    FROM CORMEN_DISC A, CORMEN_DISC_EDGES B
+    WHERE A.ID=B.EDGE_ID;
+
+-- SELECT * FROM CORMEN_DISC_EDGES_EO;
+--
+-- EDGE_ID  	START_NODE  	END_NODE  	EDGE_ORIENTATION
+-- 1	1	2	1
+-- 2	2	4	-1
+-- 3	2	3	1
+-- 4	3	2	1
+-- 5	1	3	1
+-- 6	3	4	1
+-- 7	3	5	1
+-- 8	4	5	1
+-- 9	5	4	1
+-- 10	5	1	0
+-- 11	6	7	1
+-- 12	7	8	1
+
+CALL ST_ConnectedComponents('CORMEN_DISC_EDGES_EO',
+        'directed - EDGE_ORIENTATION');
+
+-- SELECT * FROM CORMEN_DISC_EDGES_EO_NODE_CC;
+--
+-- We have on large SCC and three isolated vertices (i.e., their own SCC).
+-- NODE_ID  	CONNECTED_COMPONENT
+-- 1	4
+-- 2	4
+-- 3	4
+-- 4	4
+-- 5	4
+-- 6	1
+-- 7	2
+-- 8	3
+--
+-- We have on large SCC and two edges in no SCC.
+-- TODO: Where is edge -10?
+--
+-- SELECT * FROM CORMEN_DISC_EDGES_EO_EDGE_CC;
+--
+-- EDGE_ID  	CONNECTED_COMPONENT
+-- 1	4
+-- 2	4
+-- 3	4
+-- 4	4
+-- 5	4
+-- 6	4
+-- 7	4
+-- 8	4
+-- 9	4
+-- 10	4
+-- 11	-1
+-- 12	-1
+
 -- ________________________ ST_ShortestPath ________________________
 
 SELECT * FROM
