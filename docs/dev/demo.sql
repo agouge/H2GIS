@@ -159,6 +159,16 @@ SELECT * FROM
 -- LINESTRING (1 0, 2 0)	7	4	3	5	2.0
 -- LINESTRING (2 0, 0 1)	-10	5	1	5	7.0
 
+SELECT * FROM
+    ST_ShortestPathTree('CORMEN_EDGES_ALL',
+        'directed - EDGE_ORIENTATION',
+        'WEIGHT', 1, 6.1);
+
+-- Limiting by a search radius of 6.1 reduces the SPT to a single edge.
+--
+-- THE_GEOM  	EDGE_ID  	TREE_ID  	SOURCE  	DESTINATION  	WEIGHT
+-- LINESTRING (0 1, 1 0)	5	1	1	3	5.0
+
 -- ________________________ ST_GraphAnalysis ________________________
 
 CALL ST_GraphAnalysis('CORMEN_EDGES_ALL',
