@@ -55,6 +55,13 @@ graph.
 {% highlight mysql %}
 {% endhighlight %}
 
+<img class="displayed" src="../wdo.svg">
+<img class="displayed" src="../wdo-spt-1.svg">
+<img class="displayed" src="../wdo-spt-2.svg">
+<img class="displayed" src="../wdo-spt-3.svg">
+<img class="displayed" src="../wdo-spt-4.svg">
+<img class="displayed" src="../wdo-spt-5.svg">
+
 ##### See also
 
 * [`ST_ShortestPath`](../ST_ShortestPath),
