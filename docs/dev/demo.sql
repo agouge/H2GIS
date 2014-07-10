@@ -107,6 +107,14 @@ SELECT * FROM
 -- LINESTRING (1 0, 2 0)	7	2	2	3	5	2.0
 -- LINESTRING (0 1, 1 0)	5	2	3	1	3	5.0
 
+SELECT * FROM
+    ST_ShortestPath('CORMEN_DISC_EDGES_ALL',
+        'directed - EDGE_ORIENTATION',
+        'WEIGHT', 3, 6);
+-- Vertex 6 is not reachable from vertex 3.
+-- THE_GEOM  	EDGE_ID  	PATH_ID  	PATH_EDGE_ID  	SOURCE  	DESTINATION  	WEIGHT
+-- null	-1	-1	-1	3	6	Infinity
+
 -- _____________________ ST_ShortestPathLength _____________________
 
 SELECT * FROM
@@ -125,6 +133,14 @@ SELECT DISTANCE FROM
 -- We can obtain just the distance if we want:
 -- DISTANCE  
 -- 7.0
+
+SELECT * FROM
+    ST_ShortestPathLength('CORMEN_DISC_EDGES_ALL',
+        'directed - EDGE_ORIENTATION',
+        'WEIGHT', 3, 6);
+-- Vertex 6 is not reachable from vertex 3.
+-- SOURCE  	DESTINATION  	DISTANCE
+-- 3	6	Infinity
 
 -- ________________________ ST_GraphAnalysis ________________________
 
