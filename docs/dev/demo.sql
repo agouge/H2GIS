@@ -234,6 +234,104 @@ CALL ST_ConnectedComponents('INPUT_DISC_EDGES_EO',
 -- 11	-1
 -- 12	-1
 
+--         1         2        5,7
+--    1-------->2-------->3<------->4        12<-      11
+--    |        /|         |         ^        /   |      ^
+--    |    3 /  |         |         |       /    /18    |
+--   9|    /   4|        6|        8|13     \___/       |17
+--    |   /     |         |         |                   |
+--    |<-/ 10   v  11,12  v    14   v            15,16  |
+--    5-------->6<------->7<--------8         9<------>10
+DROP TABLE IF EXISTS EDGES;
+CREATE TABLE EDGES(EDGE_ID INT AUTO_INCREMENT PRIMARY KEY,
+                   START_NODE INT,
+                   END_NODE INT,
+                   EDGE_ORIENTATION INT);
+INSERT INTO EDGES(START_NODE, END_NODE, EDGE_ORIENTATION) VALUES
+    (1, 2, 1),
+    (2, 3, 1),
+    (2, 5, 1),
+    (2, 6, 1),
+    (3, 4, 1),
+    (3, 7, 1),
+    (4, 3, 1),
+    (4, 8, 1),
+    (5, 1, 1),
+    (5, 6, 1),
+    (6, 7, 1),
+    (7, 6, 1),
+    (8, 4, 1),
+    (8, 7, 1),
+    (9, 10, 1),
+    (10, 9, 1),
+    (10, 11, 1),
+    (12, 12, 1);
+
+-- SELECT * FROM EDGES;
+--
+-- EDGE_ID  	START_NODE  	END_NODE  	EDGE_ORIENTATION
+-- 1	1	2	1
+-- 2	2	3	1
+-- 3	2	5	1
+-- 4	2	6	1
+-- 5	3	4	1
+-- 6	3	7	1
+-- 7	4	3	1
+-- 8	4	8	1
+-- 9	5	1	1
+-- 10	5	6	1
+-- 11	6	7	1
+-- 12	7	6	1
+-- 13	8	4	1
+-- 14	8	7	1
+-- 15	9	10	1
+-- 16	10	9	1
+-- 17	10	11	1
+-- 18	12	12	1
+
+DROP TABLE IF EXISTS EDGES_NODE_CC;
+DROP TABLE IF EXISTS EDGES_EDGE_CC;
+CALL ST_ConnectedComponents('EDGES',
+        'directed - edge_orientation')
+
+-- SELECT * FROM EDGES_NODE_CC;
+--
+-- NODE_ID  	CONNECTED_COMPONENT
+-- 1	4
+-- 2	4
+-- 3	5
+-- 4	5
+-- 5	4
+-- 6	6
+-- 7	6
+-- 8	5
+-- 9	2
+-- 10	2
+-- 11	3
+-- 12	1
+--
+-- SELECT * FROM EDGES_EDGE_CC;
+--
+-- EDGE_ID  	CONNECTED_COMPONENT
+-- 1	4
+-- 2	-1
+-- 3	4
+-- 4	-1
+-- 5	5
+-- 6	-1
+-- 7	5
+-- 8	5
+-- 9	4
+-- 10	-1
+-- 11	6
+-- 12	6
+-- 13	5
+-- 14	-1
+-- 15	2
+-- 16	2
+-- 17	-1
+-- 18	1
+
 -- ________________________ ST_ShortestPath ________________________
 
 CREATE TABLE INPUT_EDGES_ALL(
