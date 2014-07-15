@@ -55,6 +55,8 @@ INSERT INTO INPUT_DISC VALUES
 -- LINESTRING (3 1, 4 2)	11	1.0	1
 -- LINESTRING (4 2, 5 2)	12	2.0	1
 
+DROP TABLE IF EXISTS INPUT_NODES;
+DROP TABLE IF EXISTS INPUT_EDGES;
 CALL ST_Graph('INPUT');
 
 -- SELECT * FROM INPUT_NODES;
@@ -80,6 +82,8 @@ CALL ST_Graph('INPUT');
 -- 9	5	4
 -- 10	5	1
 
+DROP TABLE IF EXISTS INPUT_DISC_NODES;
+DROP TABLE IF EXISTS INPUT_DISC_EDGES;
 CALL ST_Graph('INPUT_DISC');
 
 -- SELECT * FROM INPUT_DISC_NODES;
@@ -114,6 +118,7 @@ CALL ST_Graph('INPUT_DISC');
 
 -- ST_ConnectedComponents needs the edge orientation, which by default is not
 -- copied over by ST_Graph.
+DROP TABLE IF EXISTS INPUT_EDGES_EO;
 CREATE TABLE INPUT_EDGES_EO AS
     SELECT B.*, A.EDGE_ORIENTATION
     FROM INPUT A, INPUT_EDGES B
@@ -133,6 +138,9 @@ CREATE TABLE INPUT_EDGES_EO AS
 -- 9	5	4	1
 -- 10	5	1	0
 
+-- Calculate the *strongly* connected components.
+DROP TABLE IF EXISTS INPUT_EDGES_EO_NODE_CC;
+DROP TABLE IF EXISTS INPUT_EDGES_EO_EDGE_CC;
 CALL ST_ConnectedComponents('INPUT_EDGES_EO',
         'directed - EDGE_ORIENTATION');
 
@@ -164,6 +172,9 @@ CALL ST_ConnectedComponents('INPUT_EDGES_EO',
 -- 9	1
 -- 10	1
 
+-- ST_ConnectedComponents needs the edge orientation, which by default is not
+-- copied over by ST_Graph.
+DROP TABLE IF EXISTS INPUT_DISC_EDGES_EO;
 CREATE TABLE INPUT_DISC_EDGES_EO AS
     SELECT B.*, A.EDGE_ORIENTATION
     FROM INPUT_DISC A, INPUT_DISC_EDGES B
@@ -185,12 +196,15 @@ CREATE TABLE INPUT_DISC_EDGES_EO AS
 -- 11	6	7	1
 -- 12	7	8	1
 
+DROP TABLE IF EXISTS INPUT_EDGES_EO_NODE_CC;
+DROP TABLE IF EXISTS INPUT_EDGES_EO_EDGE_CC;
 CALL ST_ConnectedComponents('INPUT_DISC_EDGES_EO',
         'directed - EDGE_ORIENTATION');
 
 -- SELECT * FROM INPUT_DISC_EDGES_EO_NODE_CC;
 --
--- We have on large SCC and three isolated vertices (i.e., their own SCC).
+-- We have on large SCC (numbered 4) and three isolated vertices (which are in
+-- their own SCC).
 -- NODE_ID  	CONNECTED_COMPONENT
 -- 1	4
 -- 2	4
@@ -201,7 +215,7 @@ CALL ST_ConnectedComponents('INPUT_DISC_EDGES_EO',
 -- 7	2
 -- 8	3
 --
--- We have on large SCC and two edges in no SCC.
+-- We have on large SCC (numbered 4) and two edges in no SCC.
 -- TODO: Where is edge -10?
 --
 -- SELECT * FROM INPUT_DISC_EDGES_EO_EDGE_CC;
