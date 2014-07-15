@@ -1,9 +1,9 @@
-CREATE TABLE CORMEN(
+CREATE TABLE INPUT(
     THE_GEOM LINESTRING,
     ID INT AUTO_INCREMENT PRIMARY KEY,
     WEIGHT DOUBLE,
     EDGE_ORIENTATION INT);
-INSERT INTO CORMEN VALUES 
+INSERT INTO INPUT VALUES
 ('LINESTRING (0 1, 1 2)', DEFAULT, 10.0, 1),
 ('LINESTRING (1 2, 2 2)', DEFAULT, 1.0, -1),
 ('LINESTRING (1 2, 0.75 1, 1 0)', DEFAULT, 2.0,  1),
@@ -15,38 +15,32 @@ INSERT INTO CORMEN VALUES
 ('LINESTRING (2 0, 2.25 1, 2 2)', DEFAULT, 6.0,  1),
 ('LINESTRING (2 0, 0 1)', DEFAULT, 7.0,  0);
 
-CALL ST_Graph('CORMEN');
-
-CREATE TABLE CORMEN_EDGES_ALL AS
-    SELECT A.*, B.*
-    FROM CORMEN A, CORMEN_EDGES B
-    WHERE A.ID=B.EDGE_ID;
-
-DROP TABLE IF EXISTS CORMEN_DISC;
-CREATE TABLE CORMEN_DISC(THE_GEOM LINESTRING,
+DROP TABLE IF EXISTS INPUT_DISC;
+CREATE TABLE INPUT_DISC(THE_GEOM LINESTRING,
                          ID INT AUTO_INCREMENT PRIMARY KEY,
                          WEIGHT DOUBLE,
                          EDGE_ORIENTATION INT) AS
-    SELECT * FROM CORMEN;
-INSERT INTO CORMEN_DISC VALUES
+    SELECT * FROM INPUT;
+INSERT INTO INPUT_DISC VALUES
     ('LINESTRING (3 1, 4 2)', DEFAULT, 1.0, 1),
     ('LINESTRING (4 2, 5 2)', DEFAULT, 2.0, 1);
 
-CALL ST_Graph('CORMEN_DISC');
+CALL ST_Graph('INPUT');
+CALL ST_Graph('INPUT_DISC');
 
-CREATE TABLE CORMEN_DISC_EDGES_ALL AS
+CREATE TABLE INPUT_DISC_EDGES_ALL AS
     SELECT A.*, B.*
-    FROM CORMEN_DISC A, CORMEN_DISC_EDGES B
+    FROM INPUT_DISC A, INPUT_DISC_EDGES B
     WHERE A.ID=B.EDGE_ID;
 
 -- ____________________ ST_ConnectedComponents  ____________________
 
-CREATE TABLE CORMEN_EDGES_EO AS
+CREATE TABLE INPUT_EDGES_EO AS
     SELECT B.*, A.EDGE_ORIENTATION
-    FROM CORMEN A, CORMEN_EDGES B
+    FROM INPUT A, INPUT_EDGES B
     WHERE A.ID=B.EDGE_ID;
 
--- SELECT * FROM CORMEN_EDGES_EO;
+-- SELECT * FROM INPUT_EDGES_EO;
 --
 -- EDGE_ID  	START_NODE  	END_NODE  	EDGE_ORIENTATION
 -- 1	1	2	1
@@ -60,13 +54,13 @@ CREATE TABLE CORMEN_EDGES_EO AS
 -- 9	5	4	1
 -- 10	5	1	0
 
-CALL ST_ConnectedComponents('CORMEN_EDGES_EO',
+CALL ST_ConnectedComponents('INPUT_EDGES_EO',
         'directed - EDGE_ORIENTATION');
 
 -- On a strongly connected graph, we only have one strongly connected
 -- component.
 --
--- SELECT * FROM CORMEN_EDGES_EO_NODE_CC;
+-- SELECT * FROM INPUT_EDGES_EO_NODE_CC;
 --
 -- NODE_ID  	CONNECTED_COMPONENT
 -- 1	1
@@ -77,7 +71,7 @@ CALL ST_ConnectedComponents('CORMEN_EDGES_EO',
 --
 -- TODO: Where is edge -10?
 --
--- SELECT * FROM CORMEN_EDGES_EO_EDGE_CC;
+-- SELECT * FROM INPUT_EDGES_EO_EDGE_CC;
 --
 -- EDGE_ID  	CONNECTED_COMPONENT
 -- 1	1
@@ -91,12 +85,12 @@ CALL ST_ConnectedComponents('CORMEN_EDGES_EO',
 -- 9	1
 -- 10	1
 
-CREATE TABLE CORMEN_DISC_EDGES_EO AS
+CREATE TABLE INPUT_DISC_EDGES_EO AS
     SELECT B.*, A.EDGE_ORIENTATION
-    FROM CORMEN_DISC A, CORMEN_DISC_EDGES B
+    FROM INPUT_DISC A, INPUT_DISC_EDGES B
     WHERE A.ID=B.EDGE_ID;
 
--- SELECT * FROM CORMEN_DISC_EDGES_EO;
+-- SELECT * FROM INPUT_DISC_EDGES_EO;
 --
 -- EDGE_ID  	START_NODE  	END_NODE  	EDGE_ORIENTATION
 -- 1	1	2	1
@@ -112,10 +106,10 @@ CREATE TABLE CORMEN_DISC_EDGES_EO AS
 -- 11	6	7	1
 -- 12	7	8	1
 
-CALL ST_ConnectedComponents('CORMEN_DISC_EDGES_EO',
+CALL ST_ConnectedComponents('INPUT_DISC_EDGES_EO',
         'directed - EDGE_ORIENTATION');
 
--- SELECT * FROM CORMEN_DISC_EDGES_EO_NODE_CC;
+-- SELECT * FROM INPUT_DISC_EDGES_EO_NODE_CC;
 --
 -- We have on large SCC and three isolated vertices (i.e., their own SCC).
 -- NODE_ID  	CONNECTED_COMPONENT
@@ -131,7 +125,7 @@ CALL ST_ConnectedComponents('CORMEN_DISC_EDGES_EO',
 -- We have on large SCC and two edges in no SCC.
 -- TODO: Where is edge -10?
 --
--- SELECT * FROM CORMEN_DISC_EDGES_EO_EDGE_CC;
+-- SELECT * FROM INPUT_DISC_EDGES_EO_EDGE_CC;
 --
 -- EDGE_ID  	CONNECTED_COMPONENT
 -- 1	4
@@ -149,36 +143,45 @@ CALL ST_ConnectedComponents('CORMEN_DISC_EDGES_EO',
 
 -- ________________________ ST_ShortestPath ________________________
 
+CREATE TABLE INPUT_EDGES_ALL(
+    THE_GEOM LINESTRING,
+    ID INT AUTO_INCREMENT PRIMARY KEY,
+    WEIGHT DOUBLE,
+    EDGE_ORIENTATION INT) AS
+    SELECT A.*, B.*
+    FROM INPUT A, INPUT_EDGES B
+    WHERE A.ID=B.EDGE_ID;
+
 SELECT * FROM
-    ST_ShortestPath('CORMEN_EDGES_ALL',
+    ST_ShortestPath('INPUT_EDGES_ALL',
         'directed - EDGE_ORIENTATION',
         'WEIGHT', 5, 1);
 
 -- In this example, the shortest path is just one edge:
--- THE_GEOM  	EDGE_ID  	PATH_ID  	PATH_EDGE_ID  	SOURCE  	DESTINATION  	WEIGHT  
+-- THE_GEOM  	EDGE_ID  	PATH_ID  	PATH_EDGE_ID  	SOURCE  	DESTINATION  	WEIGHT
 -- LINESTRING (2 0, 0 1)	10	1	1	5	1	7.0
 
 SELECT * FROM
-    ST_ShortestPath('CORMEN_EDGES_ALL',
+    ST_ShortestPath('INPUT_EDGES_ALL',
         'directed - EDGE_ORIENTATION',
         'WEIGHT', 1, 5);
 
 -- In this example, there are actually two shortest paths
 -- (and two possible path numberings):
 -- FIRST NUMBERING:
--- THE_GEOM  	EDGE_ID  	PATH_ID  	PATH_EDGE_ID  	SOURCE  	DESTINATION  	WEIGHT  
+-- THE_GEOM  	EDGE_ID  	PATH_ID  	PATH_EDGE_ID  	SOURCE  	DESTINATION  	WEIGHT
 -- LINESTRING (1 0, 2 0)	7	1	1	3	5	2.0
 -- LINESTRING (0 1, 1 0)	5	1	2	1	3	5.0
 -- LINESTRING (2 0, 0 1)	-10	2	1	1	5	7.0
 -- SECOND NUMBERING:
--- THE_GEOM  	EDGE_ID  	PATH_ID  	PATH_EDGE_ID  	SOURCE  	DESTINATION  	WEIGHT  
+-- THE_GEOM  	EDGE_ID  	PATH_ID  	PATH_EDGE_ID  	SOURCE  	DESTINATION  	WEIGHT
 -- LINESTRING (2 0, 0 1)	-10	1	1	1	5	7.0
 -- LINESTRING (1 0, 2 0)	7	2	1	3	5	2.0
 -- LINESTRING (0 1, 1 0)	5	2	2	1	3	5.0
 
-SELECT * FROM 
-    ST_ShortestPath('CORMEN_EDGES_ALL', 
-        'directed - EDGE_ORIENTATION', 
+SELECT * FROM
+    ST_ShortestPath('INPUT_EDGES_ALL',
+        'directed - EDGE_ORIENTATION',
         'WEIGHT', 1, 4);
 
 -- Here is a more complicated example for path numbering.
@@ -196,7 +199,7 @@ SELECT * FROM
 --    \-----/
 --      2.1
 --
--- THE_GEOM  	EDGE_ID  	PATH_ID  	PATH_EDGE_ID  	SOURCE  	DESTINATION  	WEIGHT  
+-- THE_GEOM  	EDGE_ID  	PATH_ID  	PATH_EDGE_ID  	SOURCE  	DESTINATION  	WEIGHT
 -- LINESTRING (2 0, 2.25 1, 2 2)	9	1	1	5	4	6.0
 -- LINESTRING (1 0, 2 0)	7	1	2	3	5	2.0
 -- LINESTRING (0 1, 1 0)	5	1	3	1	3	5.0
@@ -209,14 +212,14 @@ SELECT * FROM
 --    \-----/
 --      1.2
 --
--- THE_GEOM  	EDGE_ID  	PATH_ID  	PATH_EDGE_ID  	SOURCE  	DESTINATION  	WEIGHT  
+-- THE_GEOM  	EDGE_ID  	PATH_ID  	PATH_EDGE_ID  	SOURCE  	DESTINATION  	WEIGHT
 -- LINESTRING (2 0, 2.25 1, 2 2)	9	1	1	5	4	6.0
 -- LINESTRING (2 0, 0 1)	-10	1	2	1	5	7.0
 -- LINESTRING (1 0, 2 0)	7	2	2	3	5	2.0
 -- LINESTRING (0 1, 1 0)	5	2	3	1	3	5.0
 
 SELECT * FROM
-    ST_ShortestPath('CORMEN_DISC_EDGES_ALL',
+    ST_ShortestPath('INPUT_DISC_EDGES_ALL',
         'directed - EDGE_ORIENTATION',
         'WEIGHT', 3, 6);
 -- Vertex 6 is not reachable from vertex 3.
@@ -226,24 +229,24 @@ SELECT * FROM
 -- _____________________ ST_ShortestPathLength _____________________
 
 SELECT * FROM
-    ST_ShortestPathLength('CORMEN_EDGES_ALL',
+    ST_ShortestPathLength('INPUT_EDGES_ALL',
         'directed - EDGE_ORIENTATION',
         'WEIGHT', 1, 5);
 
 -- ST_ShortestPathLength always returns a table
--- SOURCE  	DESTINATION  	DISTANCE  
+-- SOURCE  	DESTINATION  	DISTANCE
 -- 1	5	7.0
 
 SELECT DISTANCE FROM
-    ST_ShortestPathLength('CORMEN_EDGES_ALL',
+    ST_ShortestPathLength('INPUT_EDGES_ALL',
         'directed - EDGE_ORIENTATION',
         'WEIGHT', 1, 5);
 -- We can obtain just the distance if we want:
--- DISTANCE  
+-- DISTANCE
 -- 7.0
 
 SELECT * FROM
-    ST_ShortestPathLength('CORMEN_DISC_EDGES_ALL',
+    ST_ShortestPathLength('INPUT_DISC_EDGES_ALL',
         'directed - EDGE_ORIENTATION',
         'WEIGHT', 3, 6);
 -- Vertex 6 is not reachable from vertex 3.
@@ -253,7 +256,7 @@ SELECT * FROM
 -- ______________________ ST_ShortestPathTree ______________________
 
 SELECT * FROM
-    ST_ShortestPathTree('CORMEN_EDGES_ALL',
+    ST_ShortestPathTree('INPUT_EDGES_ALL',
         'directed - EDGE_ORIENTATION',
         'WEIGHT', 1);
 
@@ -268,7 +271,7 @@ SELECT * FROM
 -- LINESTRING (2 0, 0 1)	-10	5	1	5	7.0
 
 SELECT * FROM
-    ST_ShortestPathTree('CORMEN_EDGES_ALL',
+    ST_ShortestPathTree('INPUT_EDGES_ALL',
         'directed - EDGE_ORIENTATION',
         'WEIGHT', 1, 6.1);
 
@@ -281,7 +284,7 @@ SELECT * FROM
 -- depending on our starting vertex.
 
 SELECT * FROM
-    ST_ShortestPathTree('CORMEN_DISC_EDGES_ALL',
+    ST_ShortestPathTree('INPUT_DISC_EDGES_ALL',
         'directed - EDGE_ORIENTATION',
         'WEIGHT', 1);
 
@@ -295,7 +298,7 @@ SELECT * FROM
 -- LINESTRING (1 0, 2 0)	7	5	3	5	2.0
 
 SELECT * FROM
-    ST_ShortestPathTree('CORMEN_DISC_EDGES_ALL',
+    ST_ShortestPathTree('INPUT_DISC_EDGES_ALL',
         'directed - EDGE_ORIENTATION',
         'WEIGHT', 6);
 
@@ -307,11 +310,11 @@ SELECT * FROM
 
 -- ________________________ ST_GraphAnalysis ________________________
 
-CALL ST_GraphAnalysis('CORMEN_EDGES_ALL',
+CALL ST_GraphAnalysis('INPUT_EDGES_ALL',
         'directed - EDGE_ORIENTATION',
         'WEIGHT');
 
--- SELECT * FROM CORMEN_EDGES_ALL_NODE_CENT
+-- SELECT * FROM INPUT_EDGES_ALL_NODE_CENT
 --
 -- NODE_ID  	BETWEENNESS  	CLOSENESS
 -- 1	0.0	0.12121212121212122
@@ -320,7 +323,7 @@ CALL ST_GraphAnalysis('CORMEN_EDGES_ALL',
 -- 4	0.3333333333333333	0.21052631578947367
 -- 5	1.0	0.13793103448275862
 --
--- SELECT * FROM CORMEN_EDGES_ALL_EDGE_CENT
+-- SELECT * FROM INPUT_EDGES_ALL_EDGE_CENT
 --
 -- EDGE_ID  	BETWEENNESS
 -- -10	0.14285714285714285
@@ -335,7 +338,7 @@ CALL ST_GraphAnalysis('CORMEN_EDGES_ALL',
 -- 9	0.8571428571428571
 -- 10	0.5714285714285714
 
-CALL ST_GraphAnalysis('CORMEN_DISC_EDGES_ALL',
+CALL ST_GraphAnalysis('INPUT_DISC_EDGES_ALL',
         'directed - EDGE_ORIENTATION',
         'WEIGHT');
 
@@ -344,7 +347,7 @@ CALL ST_GraphAnalysis('CORMEN_DISC_EDGES_ALL',
 -- * Vertex 5 is the vertex on the most shortest paths
 -- * Vertices 1, 6 and 8 have betweenness values of zero
 --
--- SELECT * FROM CORMEN_DISC_EDGES_ALL_NODE_CENT ORDER BY BETWEENNESS DESC;
+-- SELECT * FROM INPUT_DISC_EDGES_ALL_NODE_CENT ORDER BY BETWEENNESS DESC;
 --
 -- NODE_ID  	BETWEENNESS  	CLOSENESS
 -- 5	1.0	0.0
@@ -361,7 +364,7 @@ CALL ST_GraphAnalysis('CORMEN_DISC_EDGES_ALL',
 -- * Edge 10 is on more shortest paths than edge -10
 -- * Edges 1 and 6 are on no shortest paths
 --
--- SELECT * FROM CORMEN_DISC_EDGES_ALL_EDGE_CENT ORDER BY BETWEENNESS DESC;
+-- SELECT * FROM INPUT_DISC_EDGES_ALL_EDGE_CENT ORDER BY BETWEENNESS DESC;
 --
 -- EDGE_ID  	BETWEENNESS
 -- 7	1.0
