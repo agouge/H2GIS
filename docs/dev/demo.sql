@@ -332,6 +332,44 @@ CALL ST_ConnectedComponents('EDGES',
 -- 17	-1
 -- 18	1
 
+-- Count edge SCCs:
+DROP TABLE IF EXISTS EDGE_CC_TOTALS;
+CREATE TABLE EDGE_CC_TOTALS AS
+    SELECT CONNECTED_COMPONENT CC,
+           COUNT(CONNECTED_COMPONENT) CC_COUNT
+    FROM EDGES_EDGE_CC
+    GROUP BY CC
+    ORDER BY CC_COUNT DESC;
+
+-- SELECT * FROM EDGE_CC_TOTALS;
+--
+-- CC  	CC_COUNT
+-- -1	6
+-- 5	4
+-- 4	3
+-- 2	2
+-- 6	2
+-- 1	1
+
+-- Creating these indices will greatly speed up the calculation.
+CREATE INDEX ON EDGES(EDGE_ID);
+CREATE INDEX ON EDGES_EDGE_CC(EDGE_ID);
+-- Select the largest SCC:
+DROP TABLE IF EXISTS EDGES_LARGEST;
+CREATE TABLE EDGES_LARGEST AS
+    SELECT A.*
+    FROM EDGES A, EDGES_EDGE_CC B
+    WHERE A.EDGE_ID=B.EDGE_ID
+    AND B.CONNECTED_COMPONENT=5;
+
+-- SELECT * FROM EDGES_LARGEST;
+--
+-- EDGE_ID  	START_NODE  	END_NODE  	EDGE_ORIENTATION
+-- 5	3	4	1
+-- 7	4	3	1
+-- 8	4	8	1
+-- 13	8	4	1
+
 -- ________________________ ST_ShortestPath ________________________
 
 CREATE TABLE INPUT_EDGES_ALL(
