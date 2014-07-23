@@ -188,3 +188,23 @@ CREATE TABLE BETW_NORM AS
            (BETW - (SELECT MIN(BETW) FROM BETW)) /
              ((SELECT MAX(BETW) FROM BETW) -
               (SELECT MIN(BETW) FROM BETW)) NORM_BETW FROM BETW;
+SELECT * FROM BETW_NORM;
+-- | V |           NORM_BETW |
+-- |---|---------------------|
+-- | 1 |                 0.0 |
+-- | 2 | 0.11111111111111108 |
+-- | 3 |                 1.0 |
+-- | 4 |  0.4444444444444445 |
+-- | 5 |  0.6666666666666666 |
+
+CREATE TABLE INPUT_EDGES_CC AS
+    SELECT * FROM INPUT_EDGES WHERE EDGE_ID<11;
+CALL ST_GraphAnalysis('INPUT_EDGES_CC', 'undirected');
+SELECT * FROM INPUT_EDGES_CC_NODE_CENT;
+-- | NODE_ID |         BETWEENNESS | CLOSENESS |
+-- |---------|---------------------|-----------|
+-- |       1 |                 0.0 |       0.8 |
+-- |       2 | 0.14285714285714282 |       0.8 |
+-- |       3 |                 1.0 |       1.0 |
+-- |       4 |  0.2857142857142858 |       0.8 |
+-- |       5 | 0.49999999999999994 |       0.8 |
