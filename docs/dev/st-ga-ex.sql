@@ -2,83 +2,83 @@
 DROP TABLE IF EXISTS SP1_2;
 CREATE TABLE SP1_2 AS
     SELECT * FROM
-    ST_ShortestPath('INPUT_EDGES', 'undirected', 1, 2);
+    ST_ShortestPath('INPUT_EDGES_EO', 'directed - EDGE_ORIENTATION', 1, 2);
 DROP TABLE IF EXISTS SP1_3;
 CREATE TABLE SP1_3 AS
     SELECT * FROM
-    ST_ShortestPath('INPUT_EDGES', 'undirected', 1, 3);
+    ST_ShortestPath('INPUT_EDGES_EO', 'directed - EDGE_ORIENTATION', 1, 3);
 DROP TABLE IF EXISTS SP1_4;
 CREATE TABLE SP1_4 AS
     SELECT * FROM
-    ST_ShortestPath('INPUT_EDGES', 'undirected', 1, 4);
+    ST_ShortestPath('INPUT_EDGES_EO', 'directed - EDGE_ORIENTATION', 1, 4);
 DROP TABLE IF EXISTS SP1_5;
 CREATE TABLE SP1_5 AS
     SELECT * FROM
-    ST_ShortestPath('INPUT_EDGES', 'undirected', 1, 5);
+    ST_ShortestPath('INPUT_EDGES_EO', 'directed - EDGE_ORIENTATION', 1, 5);
 DROP TABLE IF EXISTS SP2_1;
 CREATE TABLE SP2_1 AS
     SELECT * FROM
-    ST_ShortestPath('INPUT_EDGES', 'undirected', 2, 1);
+    ST_ShortestPath('INPUT_EDGES_EO', 'directed - EDGE_ORIENTATION', 2, 1);
 DROP TABLE IF EXISTS SP2_3;
 CREATE TABLE SP2_3 AS
     SELECT * FROM
-    ST_ShortestPath('INPUT_EDGES', 'undirected', 2, 3);
+    ST_ShortestPath('INPUT_EDGES_EO', 'directed - EDGE_ORIENTATION', 2, 3);
 DROP TABLE IF EXISTS SP2_4;
 CREATE TABLE SP2_4 AS
     SELECT * FROM
-    ST_ShortestPath('INPUT_EDGES', 'undirected', 2, 4);
+    ST_ShortestPath('INPUT_EDGES_EO', 'directed - EDGE_ORIENTATION', 2, 4);
 DROP TABLE IF EXISTS SP2_5;
 CREATE TABLE SP2_5 AS
     SELECT * FROM
-    ST_ShortestPath('INPUT_EDGES', 'undirected', 2, 5);
+    ST_ShortestPath('INPUT_EDGES_EO', 'directed - EDGE_ORIENTATION', 2, 5);
 DROP TABLE IF EXISTS SP3_1;
 CREATE TABLE SP3_1 AS
     SELECT * FROM
-    ST_ShortestPath('INPUT_EDGES', 'undirected', 3, 1);
+    ST_ShortestPath('INPUT_EDGES_EO', 'directed - EDGE_ORIENTATION', 3, 1);
 DROP TABLE IF EXISTS SP3_2;
 CREATE TABLE SP3_2 AS
     SELECT * FROM
-    ST_ShortestPath('INPUT_EDGES', 'undirected', 3, 2);
+    ST_ShortestPath('INPUT_EDGES_EO', 'directed - EDGE_ORIENTATION', 3, 2);
 DROP TABLE IF EXISTS SP3_4;
 CREATE TABLE SP3_4 AS
     SELECT * FROM
-    ST_ShortestPath('INPUT_EDGES', 'undirected', 3, 4);
+    ST_ShortestPath('INPUT_EDGES_EO', 'directed - EDGE_ORIENTATION', 3, 4);
 DROP TABLE IF EXISTS SP3_5;
 CREATE TABLE SP3_5 AS
     SELECT * FROM
-    ST_ShortestPath('INPUT_EDGES', 'undirected', 3, 5);
+    ST_ShortestPath('INPUT_EDGES_EO', 'directed - EDGE_ORIENTATION', 3, 5);
 DROP TABLE IF EXISTS SP4_1;
 CREATE TABLE SP4_1 AS
     SELECT * FROM
-    ST_ShortestPath('INPUT_EDGES', 'undirected', 4, 1);
+    ST_ShortestPath('INPUT_EDGES_EO', 'directed - EDGE_ORIENTATION', 4, 1);
 DROP TABLE IF EXISTS SP4_2;
 CREATE TABLE SP4_2 AS
     SELECT * FROM
-    ST_ShortestPath('INPUT_EDGES', 'undirected', 4, 2);
+    ST_ShortestPath('INPUT_EDGES_EO', 'directed - EDGE_ORIENTATION', 4, 2);
 DROP TABLE IF EXISTS SP4_3;
 CREATE TABLE SP4_3 AS
     SELECT * FROM
-    ST_ShortestPath('INPUT_EDGES', 'undirected', 4, 3);
+    ST_ShortestPath('INPUT_EDGES_EO', 'directed - EDGE_ORIENTATION', 4, 3);
 DROP TABLE IF EXISTS SP4_5;
 CREATE TABLE SP4_5 AS
     SELECT * FROM
-    ST_ShortestPath('INPUT_EDGES', 'undirected', 4, 5);
+    ST_ShortestPath('INPUT_EDGES_EO', 'directed - EDGE_ORIENTATION', 4, 5);
 DROP TABLE IF EXISTS SP5_1;
 CREATE TABLE SP5_1 AS
     SELECT * FROM
-    ST_ShortestPath('INPUT_EDGES', 'undirected', 5, 1);
+    ST_ShortestPath('INPUT_EDGES_EO', 'directed - EDGE_ORIENTATION', 5, 1);
 DROP TABLE IF EXISTS SP5_2;
 CREATE TABLE SP5_2 AS
     SELECT * FROM
-    ST_ShortestPath('INPUT_EDGES', 'undirected', 5, 2);
+    ST_ShortestPath('INPUT_EDGES_EO', 'directed - EDGE_ORIENTATION', 5, 2);
 DROP TABLE IF EXISTS SP5_3;
 CREATE TABLE SP5_3 AS
     SELECT * FROM
-    ST_ShortestPath('INPUT_EDGES', 'undirected', 5, 3);
+    ST_ShortestPath('INPUT_EDGES_EO', 'directed - EDGE_ORIENTATION', 5, 3);
 DROP TABLE IF EXISTS SP5_4;
 CREATE TABLE SP5_4 AS
     SELECT * FROM
-    ST_ShortestPath('INPUT_EDGES', 'undirected', 5, 4);
+    ST_ShortestPath('INPUT_EDGES_EO', 'directed - EDGE_ORIENTATION', 5, 4);
 
 -- Construct the number of shortest paths matrix.
 DROP TABLE IF EXISTS N_SP;
@@ -190,21 +190,21 @@ CREATE TABLE BETW_NORM AS
               (SELECT MIN(BETW) FROM BETW)) NORM_BETW FROM BETW;
 SELECT * FROM BETW_NORM;
 -- | V |           NORM_BETW |
--- |---|---------------------|
--- | 1 |                 0.0 |
--- | 2 | 0.11111111111111108 |
+-- |--:|--------------------:|
+-- | 1 |  0.3333333333333333 |
+-- | 2 | 0.16666666666666666 |
 -- | 3 |                 1.0 |
--- | 4 |  0.4444444444444445 |
--- | 5 |  0.6666666666666666 |
+-- | 4 |                 0.0 |
+-- | 5 |                 1.0 |
 
-CREATE TABLE INPUT_EDGES_CC AS
-    SELECT * FROM INPUT_EDGES WHERE EDGE_ID<11;
-CALL ST_GraphAnalysis('INPUT_EDGES_CC', 'undirected');
-SELECT * FROM INPUT_EDGES_CC_NODE_CENT;
--- | NODE_ID |         BETWEENNESS | CLOSENESS |
--- |---------|---------------------|-----------|
--- |       1 |                 0.0 |       0.8 |
--- |       2 | 0.14285714285714282 |       0.8 |
--- |       3 |                 1.0 |       1.0 |
--- |       4 |  0.2857142857142858 |       0.8 |
--- |       5 | 0.49999999999999994 |       0.8 |
+CREATE TABLE INPUT_EDGES_EO_CC AS
+    SELECT * FROM INPUT_EDGES_EO WHERE EDGE_ID<11;
+CALL ST_GraphAnalysis('INPUT_EDGES_EO_CC', 'directed - EDGE_ORIENTATION');
+SELECT * FROM INPUT_EDGES_EO_CC_NODE_CENT;
+-- | NODE_ID |         BETWEENNESS |          CLOSENESS |
+-- |--------:|--------------------:|-------------------:|
+-- |       1 |  0.3333333333333333 |                0.8 |
+-- |       2 | 0.16666666666666666 |                0.5 |
+-- |       3 |                 1.0 |                0.8 |
+-- |       4 |                 0.0 | 0.6666666666666666 |
+-- |       5 |                 1.0 | 0.6666666666666666 |
