@@ -134,6 +134,17 @@ public class ST_AccessibilityTest {
     }
 
     @Test
+    public void WDODisconnected() throws Exception {
+        check(st.executeQuery("SELECT * FROM ST_Accessibility(" +
+                "'COPY_EDGES_ALL', 'directed - EDGE_ORIENTATION', 'WEIGHT', '1, 5');"),
+                new int[]{1, 5, 5, 5, 5, -1, -1, -1},
+                new double[]{0.0, 4.0, 2.0, 4.0, 0.0,
+                        Double.POSITIVE_INFINITY,
+                        Double.POSITIVE_INFINITY,
+                        Double.POSITIVE_INFINITY});
+    }
+
+    @Test
     public void RO() throws Exception {
         // SELECT * FROM ST_Accessibility('CORMEN_EDGES_ALL',
         //     'reversed - edge_orientation', '1, 5')
