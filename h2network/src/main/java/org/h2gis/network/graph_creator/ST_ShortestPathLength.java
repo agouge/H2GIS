@@ -34,12 +34,11 @@ import org.javanetworkanalyzer.alg.Dijkstra;
 import org.javanetworkanalyzer.data.VDijkstra;
 import org.javanetworkanalyzer.model.Edge;
 import org.javanetworkanalyzer.model.KeyedGraph;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.*;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import static org.h2gis.h2spatial.TableFunctionUtil.isColumnListConnection;
 import static org.h2gis.utilities.GraphConstants.*;
@@ -55,6 +54,9 @@ public class ST_ShortestPathLength extends GraphFunction implements ScalarFuncti
     public static final int SOURCE_INDEX = 1;
     public static final int DESTINATION_INDEX = 2;
     public static final int DISTANCE_INDEX = 3;
+
+    private static final Logger LOGGER =
+            LoggerFactory.getLogger("gui." + ST_ShortestPathLength.class);
 
     public static final String REMARKS =
             "`ST_ShortestPathLength` calculates the length(s) of shortest path(s) among\n" +
@@ -270,7 +272,11 @@ public class ST_ShortestPathLength extends GraphFunction implements ScalarFuncti
             Map<VDijkstra, Set<VDijkstra>> sourceDestinationMap =
                     prepareSourceDestinationMap(st, sourceDestinationTable, graph);
 
+            LOGGER.info("Beginning calculation.");
             // 6: (o, w, sdt). Do One-to-Many many times and store the results.
+            int count = 0;
+            int total = countTotal(st, sourceDestinationTable);
+            final long start = System.currentTimeMillis();
             for (Map.Entry<VDijkstra, Set<VDijkstra>> sourceToDestSetMap : sourceDestinationMap.entrySet()) {
                 Map<VDijkstra, Double> distances = new Dijkstra<VDijkstra, Edge>(graph)
                         .oneToMany(sourceToDestSetMap.getKey(), sourceToDestSetMap.getValue());
@@ -278,11 +284,34 @@ public class ST_ShortestPathLength extends GraphFunction implements ScalarFuncti
                     output.addRow(sourceToDestSetMap.getKey().getID(),
                             destToDistMap.getKey().getID(), destToDistMap.getValue());
                 }
+                count++;
+                if (count % 100 == 0) {
+                    logProgress(count, total, start);
+                }
             }
+            logProgress(count, total, start);
         } finally {
             st.close();
         }
         return output;
+    }
+
+    private static int countTotal(Statement st, String sourceDestinationTable) throws SQLException {
+        final ResultSet countSD = st.executeQuery("SELECT COUNT(*) FROM " + sourceDestinationTable);
+        try {
+            countSD.next();
+            return countSD.getInt(1);
+        } finally {
+            countSD.close();
+        }
+    }
+
+    private static void logProgress(int count, int total, long start) {
+        LOGGER.info("Processed {} of {} source-destination pairs ({}%, {} seconds)",
+                new Object[]{count, total,
+                        (double) Math.round(count * 1000. / total) / 10,
+                        (double) Math.round((System.currentTimeMillis() - start) * 10 / 1000) / 10
+                });
     }
 
     private static ResultSet oneToSeveral(Connection connection,
@@ -328,9 +357,9 @@ public class ST_ShortestPathLength extends GraphFunction implements ScalarFuncti
             String sourceDestinationTable,
             KeyedGraph<VDijkstra, Edge> graph) throws SQLException {
         final ResultSet sourceDestinationRS =
-                st.executeQuery("SELECT * FROM " + sourceDestinationTable);
-        // Make sure the source-destination table has columns named
-        // SOURCE and DESTINATION. An SQLException is thrown if not.
+                st.executeQuery("SELECT DISTINCT " +
+                        SOURCE + ", " + DESTINATION +
+                        " FROM " + sourceDestinationTable);
         final int sourceIndex = sourceDestinationRS.findColumn(SOURCE);
         final int destinationIndex = sourceDestinationRS.findColumn(DESTINATION);
         Map<VDijkstra, Set<VDijkstra>> map = new HashMap<VDijkstra, Set<VDijkstra>>();
