@@ -412,12 +412,15 @@ public class ST_Graph extends AbstractFunction implements ScalarFunction {
             st.execute("CREATE SPATIAL INDEX ON " + nodesName + "(EXP);");
             st.execute("CREATE SPATIAL INDEX ON COORDS(START_POINT_EXP);");
             st.execute("CREATE SPATIAL INDEX ON COORDS(END_POINT_EXP);");
-            st.execute("CREATE TABLE " + edgesName + " AS " +
+            st.execute("CREATE TABLE " + edgesName + "(" +
+                    "EDGE_ID INT PRIMARY KEY," +
+                    "START_NODE INT," +
+                    "END_NODE INT) AS " +
                     "SELECT EDGE_ID, " +
                     "(SELECT NODE_ID FROM " + nodesName +
-                    " WHERE " + nodesName + ".EXP && COORDS.START_POINT_EXP LIMIT 1) START_NODE, " +
+                    " WHERE " + nodesName + ".EXP && COORDS.START_POINT_EXP LIMIT 1), " +
                     "(SELECT NODE_ID FROM " + nodesName +
-                    " WHERE " + nodesName + ".EXP && COORDS.END_POINT_EXP LIMIT 1) END_NODE " +
+                    " WHERE " + nodesName + ".EXP && COORDS.END_POINT_EXP LIMIT 1) " +
                     "FROM COORDS;");
             st.execute("ALTER TABLE " + nodesName + " DROP COLUMN EXP;");
         } else {
@@ -426,14 +429,17 @@ public class ST_Graph extends AbstractFunction implements ScalarFunction {
             st.execute("CREATE SPATIAL INDEX ON COORDS(END_POINT);");
             // If the tolerance is zero, then we can use = on the geometries
             // instead of && on the envelopes.
-            st.execute("CREATE TABLE " + edgesName + " AS " +
+            st.execute("CREATE TABLE " + edgesName + "(" +
+                    "EDGE_ID INT PRIMARY KEY," +
+                    "START_NODE INT," +
+                    "END_NODE INT) AS " +
                     "SELECT EDGE_ID, " +
                     "(SELECT NODE_ID FROM " + nodesName +
                     " WHERE " + nodesName + ".THE_GEOM && COORDS.START_POINT " +
-                    "AND " + nodesName + ".THE_GEOM=COORDS.START_POINT LIMIT 1) START_NODE, " +
+                    "AND " + nodesName + ".THE_GEOM=COORDS.START_POINT LIMIT 1), " +
                     "(SELECT NODE_ID FROM " + nodesName +
                     " WHERE " + nodesName + ".THE_GEOM && COORDS.END_POINT " +
-                    "AND " + nodesName + ".THE_GEOM=COORDS.END_POINT LIMIT 1) END_NODE " +
+                    "AND " + nodesName + ".THE_GEOM=COORDS.END_POINT LIMIT 1) " +
                     "FROM COORDS;");
         }
     }

@@ -28,6 +28,7 @@ import org.h2.jdbc.JdbcSQLException;
 import org.h2gis.h2spatial.ut.SpatialH2UT;
 import org.h2gis.h2spatialext.function.spatial.graph.ST_Graph;
 import org.h2gis.utilities.GraphConstants;
+import org.h2gis.utilities.JDBCUtilities;
 import org.junit.*;
 
 import java.sql.Connection;
@@ -642,5 +643,19 @@ public class ST_GraphTest {
             assertTrue(originalCause.getMessage().equals(ST_Graph.ALREADY_RUN_ERROR + "TEST"));
             throw originalCause;
         }
+    }
+
+    @Test
+    public void testPrimaryKeys() throws Throwable {
+        // Tolerance > 0.0.
+        multiTestPrep();
+        st.execute("CALL ST_Graph('TEST', 'road', 0.1, false)");
+        assertTrue(JDBCUtilities.getIntegerPrimaryKey(connection, "TEST_NODES") > 0);
+        assertTrue(JDBCUtilities.getIntegerPrimaryKey(connection, "TEST_EDGES") > 0);
+        st.execute("DROP TABLE TEST_NODES; DROP TABLE TEST_EDGES;");
+        // Tolerance = 0.0.
+        st.execute("CALL ST_Graph('TEST', 'road')");
+        assertTrue(JDBCUtilities.getIntegerPrimaryKey(connection, "TEST_NODES") > 0);
+        assertTrue(JDBCUtilities.getIntegerPrimaryKey(connection, "TEST_EDGES") > 0);
     }
 }
